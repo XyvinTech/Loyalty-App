@@ -1,4 +1,4 @@
-import { Loyalty, Person, SpaceDashboard, Work } from "@mui/icons-material";
+import { Loyalty, Person, SpaceDashboard, SyncAlt, Work } from "@mui/icons-material";
 
 export const adminNavActions = [
     {
@@ -9,7 +9,7 @@ export const adminNavActions = [
     {
         title:'Transactions',
         href:'dashboard/transaction',
-        icon: <Work/>
+        icon: <SyncAlt/>
     },
     {
         title:'Loyal Cards',

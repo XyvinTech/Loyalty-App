@@ -21,7 +21,7 @@ export default function Loyalcard() {
             <AddLoyalty open={open} onClose={()=>{setOpen(false)}}/>
             <Stack direction={"row"}
                 sx={{ p: 2, justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', borderRadius: '4px', boxShadow: '0 0 15px #ccc' }}>
-                <Typography variant='h6' sx={{ fontWeight: 600, color: 'primary.textContrast' }}>Loyal Cards</Typography>
+                <Typography variant='h6' sx={{ fontWeight: 600, color: 'secondary.contrastText' }}>Loyal Cards</Typography>
                 <Button variant='contained' onClick={()=>{setOpen(true)}}>Add Card</Button>
             </Stack>
             <StyledTable header={HEADER} data={coupenData}/>

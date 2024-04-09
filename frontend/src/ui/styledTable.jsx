@@ -33,7 +33,7 @@ export default function StyledTable({ header = [], data = [], isAction = false, 
                                 // if (head == "icon") {
                                 //     return(<TableCell key={ind}/>)
                                 // }
-                                return (<TableCell key={ind} ><Typography variant='subtitle2' noWrap>{head}</Typography></TableCell>)
+                                return (<TableCell key={ind} ><Typography variant='subtitle2' sx={{fontWeight:600}} noWrap>{head}</Typography></TableCell>)
                             })
                         }
                         {isAction && <TableCell />}
@@ -58,9 +58,9 @@ export default function StyledTable({ header = [], data = [], isAction = false, 
                                             </Stack>
                                         </TableCell>)
                                     } else if (head.toLowerCase() == "status") {
-                                        return (<TableCell key={ind}><TabelStatus title={row[`${head}`]}/></TableCell>)
+                                        return (<TableCell width={'10%'} key={ind} align='center' ><TabelStatus title={row[`${head}`]}/></TableCell>)
                                     }
-                                    return (<TableCell key={ind}>{row[`${head}`]}</TableCell>)
+                                    return (<TableCell key={ind} >{row[`${head}`]}</TableCell>)
                                 })
                             }
                             {/* <TableCell sx={{ height: 5 }}>
