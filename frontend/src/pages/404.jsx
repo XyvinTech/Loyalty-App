@@ -1,8 +1,10 @@
 import React from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
 
 export default function Error404() {
+  const navigate = useNavigate()
   return (
     <Box
       sx={{
@@ -10,7 +12,7 @@ export default function Error404() {
         justifyContent: 'center',
         alignItems: 'center',
         width:'100%',
-        height:'100%'
+        height:'100vh'
       }}
     >
       <Container maxWidth="md">
@@ -22,7 +24,7 @@ export default function Error404() {
             <Typography variant="h6">
               The page you’re looking for doesn’t exist.
             </Typography>
-            <Button variant="contained">Back Home</Button>
+            <Button variant="contained" onClick={()=>navigate('/dashboard')}>Back Home</Button>
           </Grid>
           <Grid xs={6}>
             <img

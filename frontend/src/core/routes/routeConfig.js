@@ -4,17 +4,27 @@ import Login from "../../pages/login"
 import DashboardLayout from "../../layout/dashboardLayout"
 import Error404 from "../../pages/404"
 import Transaction from "../../pages/transaction"
+import Loyalcard from "../../pages/loyalcard"
 
 export const RoutesConfig = () => {
 
     return [
         {
             path: '/',
-            element: <Navigate to='/login' replace />
+            // element: <Navigate to='/login' replace />
+            element: <Navigate to='/dashboard' replace />
         },
         {
             path: '/login',
             element: <Login />
+        },
+        {
+            path: '/error404',
+            element: <Error404 />,
+        },
+        {
+            path: '*',
+            element: <Navigate to={"/error404"} />,
         },
         {
             path: '/dashboard',
@@ -22,11 +32,15 @@ export const RoutesConfig = () => {
             children: [
                 {
                     path: 'transaction',
-                    element: <Transaction/>,
+                    element: <Transaction />,
+                },
+                {
+                    path: 'loyalcard',
+                    element: <Loyalcard />,
                 },
                 {
                     path: '*',
-                    element: <Error404/>,
+                    element: <Navigate to={"/error404"} />,
                 }
             ]
         }

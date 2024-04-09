@@ -1,11 +1,12 @@
-import { Avatar, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, Typography } from '@mui/material'
+import { Avatar, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, Typography } from '@mui/material'
 import React from 'react'
 // import StyledTableActionCell from './tableAction'
 import { useState } from 'react';
+import TabelStatus from './tabelStatus';
 // import TableDescription from './tableDescription';
 
 
-export default function StyledTable({ header = [], data = [], isAction = true, actions = ["Edit", "Delete"], onActionClick }) {
+export default function StyledTable({ header = [], data = [], isAction = false, actions = ["Edit", "Delete"], onActionClick }) {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -25,14 +26,14 @@ export default function StyledTable({ header = [], data = [], isAction = true, a
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 900 }} size='small' hover>
-                <TableHead sx={{backgroundColor:'primary.lighter'}}>
+                <TableHead sx={{ backgroundColor: 'primary.lighter' }}>
                     <TableRow>
                         {
                             header.map((head, ind) => {
                                 // if (head == "icon") {
                                 //     return(<TableCell key={ind}/>)
                                 // }
-                                return(<TableCell key={ind} ><Typography variant='subtitle2' noWrap>{head}</Typography></TableCell>)
+                                return (<TableCell key={ind} ><Typography variant='subtitle2' noWrap>{head}</Typography></TableCell>)
                             })
                         }
                         {isAction && <TableCell />}
@@ -49,12 +50,17 @@ export default function StyledTable({ header = [], data = [], isAction = true, a
                         >
                             {
                                 header.map((head, ind) => {
-                                    // if (head == "icon") {
-                                    //     return(<TableCell key={ind}><img src={`${row[`${head}`]}`} style={{objectFit:'contain',height:'40px',width:'40px'}}/></TableCell>)
-                                    // }else if(head.toLowerCase() == "description"){
-                                    //     return(<TableCell key={ind}><TableDescription text={row[`${head}`]}/></TableCell>)
-                                    // }
-                                    return(<TableCell key={ind}>{row[`${head}`]}</TableCell>)
+                                    if (["amount", "worth"].includes(head.toLowerCase())) {
+                                        return (<TableCell key={ind}>
+                                            <Stack direction={'row'} spacing={1} sx={{alignItems:'center'}}>
+                                                <Typography variant='subtitle2'>{row[`${head}`]} </Typography>
+                                                <Typography variant='subtitle2' sx={{fontSize:'10px',color:'primary.textContrast'}}>AED</Typography>
+                                            </Stack>
+                                        </TableCell>)
+                                    } else if (head.toLowerCase() == "status") {
+                                        return (<TableCell key={ind}><TabelStatus title={row[`${head}`]}/></TableCell>)
+                                    }
+                                    return (<TableCell key={ind}>{row[`${head}`]}</TableCell>)
                                 })
                             }
                             {/* <TableCell sx={{ height: 5 }}>
