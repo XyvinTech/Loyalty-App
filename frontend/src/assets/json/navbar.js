@@ -1,4 +1,4 @@
-import { Loyalty, Person, SpaceDashboard, SyncAlt, Work } from "@mui/icons-material";
+import { Category, Loyalty, Person, SpaceDashboard, SyncAlt, Work } from "@mui/icons-material";
 
 export const adminNavActions = [
     {
@@ -20,5 +20,10 @@ export const adminNavActions = [
         title:'Users',
         href:'dashboard/users',
         icon: <Person/>
+    },
+    {
+        title:'Categories',
+        href:'dashboard/categories',
+        icon: <Category/>
     }
 ]
