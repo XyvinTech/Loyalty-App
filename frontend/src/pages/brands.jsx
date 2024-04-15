@@ -2,18 +2,19 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import StyledTable from '../ui/styledTable'
 import { tableHeaderReplace } from '../utils/tableHeaderReplace'
-import { deleteCategory, getCategory } from '../services/category'
 import AddCategory from '../components/category/addCategory'
+import { deleteBrand, getBrand } from '../services/brands'
 import { toast } from 'react-toastify'
+import AddBrand from '../components/brands/addBrand'
 
 const HEADER = [
     'Title',
     'created on',
 ]
 
-export default function Categories() {
+export default function Brands() {
     const [open, setOpen] = useState(false)
-    const [categoryData, setCategoryData] = useState([])
+    const [brandData, setBrandData] = useState([])
     const [editStatus, setEditStatus] = useState(false)
     const [selectedData, setSelectedData] = useState()
 
@@ -22,38 +23,40 @@ export default function Categories() {
     }, [])
 
     const init = () => {
-        getCategory().then((res) => {
+        getBrand().then((res) => {
             if (res.status) {
                 console.log(res.result);
-                setCategoryData(tableHeaderReplace(res.result, ['title', 'createdAt'], HEADER))
+                setBrandData(tableHeaderReplace(res.result, ['title', 'createdAt'], HEADER))
             }
         })
     }
-    const deleteCategories = (id)=>{
-        deleteCategory(id).then(res=>{
+
+    const deleteBrands = (id)=>{
+        deleteBrand(id).then(res=>{
             toast.success(res.message)
             init()
         })
     }
+
     const handleTableAction = (e) => {
         if (e.action === 'Edit') {
             setSelectedData(e.data)
             setEditStatus(true)
             setOpen(true)
         }else if (e.action === 'Delete'){
-            deleteCategories(e.data._id)
+            deleteBrands(e.data._id)
         }
     }
 
     return (
         <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <AddCategory open={open} onClose={() => { setOpen(false) }} isUpdate={editStatus} categoryData={selectedData} isSubmitted={init} />
+            <AddBrand open={open} onClose={() => { setOpen(false) }} isUpdate={editStatus} brandData={selectedData} isSubmitted={init} />
             <Stack direction={"row"}
                 sx={{ p: 2, justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', borderRadius: '4px', boxShadow: '0 0 15px #ccc' }}>
-                <Typography variant='h6' sx={{ fontWeight: 600, color: 'secondary.contrastText' }}>Categories</Typography>
-                <Button variant='contained' onClick={() => { setEditStatus(false); setOpen(true) }}>Add Category</Button>
+                <Typography variant='h6' sx={{ fontWeight: 600, color: 'secondary.contrastText' }}>Brands</Typography>
+                <Button variant='contained' onClick={() => { setEditStatus(false); setOpen(true) }}>Add Brands</Button>
             </Stack>
-            <StyledTable header={HEADER} data={categoryData} actions={["Edit","Delete"]} isAction onActionClick={handleTableAction} />
+            <StyledTable header={HEADER} data={brandData} actions={["Edit","Delete"]} isAction onActionClick={handleTableAction} />
         </Box>
     )
 }

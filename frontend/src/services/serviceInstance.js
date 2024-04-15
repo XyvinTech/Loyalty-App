@@ -29,3 +29,4 @@ const createAxiosInstance = (baseURL, defaultHeaders = {}) => {
 export const ADMIN_INSTANCE = createAxiosInstance(`${BASE_URL}api/admins`, { "Content-Type": "application/json" });
 export const CARD_INSTANCE = createAxiosInstance(`${BASE_URL}api/loyalitycard`, { "Content-Type": "application/json" });
 export const CATEGORY_INSTANCE = createAxiosInstance(`${BASE_URL}api/category`, { "Content-Type": "application/json" });
+export const BRAND_INSTANCE = createAxiosInstance(`${BASE_URL}api/brand`, { "Content-Type": "application/json" });

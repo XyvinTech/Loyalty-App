@@ -10,14 +10,23 @@ import { formatDate } from '../../utils/dateFormat';
 import { addLoyalityCard, updateLoyalityCard } from '../../services/loyaltyCard';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
+import { getBrand } from '../../services/brands';
+import FileUpload from '../../utils/FileUpload';
 
 export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSubmitted }) {
-    const [selectedFile, setSelectedFile] = useState("")
+    const [selectedFile, setSelectedFile] = useState()
     const [categories, setCategories] = useState([])
+    const [brands, setBrands] = useState([])
     useEffect(() => {
         getCategory().then((res) => {
             if (res.status) {
                 setCategories(res.result.map((item) => ({ label: item.title, value: item._id })))
+            }
+        })
+
+        getBrand().then((res) => {
+            if (res.status) {
+                setBrands(res.result.map((item) => ({ label: item.title, value: item._id })))
             }
         })
     }, [])
@@ -47,7 +56,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
             editCard(data)
         } else {
             if (!selectedFile) {
-                setError("brand", { type: "manual", message: "Select logo of brand" })
+                setError("file", { type: "manual", message: "Select image for Offer" })
                 return
             }
             addCard({ brand_logo: "nil", ...data })
@@ -55,9 +64,11 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
         console.log(data);
     }
 
-    const addCard = ({ category, expiry, ...data }) => {
+    const addCard = ({ category, brand, expiry, ...data }) => {
         let dt = {
             category: category.value,
+            brand: brand.value,
+            image:'nil',
             expiry: formatDate(expiry),
             ...data
         }
@@ -73,9 +84,11 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
         })
     }
 
-    const editCard = ({ category, expiry, status, ...data }) => {
+    const editCard = ({ category, brand, expiry, status, ...data }) => {
         let dt = {
             category: category.value,
+            brand: brand.value,
+            image:'nil',
             expiry: formatDate(expiry),
             status: status ? "active" : "inactive",
             ...data
@@ -98,8 +111,8 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
     }
 
     const onFileChange = (e) => {
-        console.log(e.target.files[0]);
-        setSelectedFile(e.target.files[0])
+        setSelectedFile(e.files[0])
+        console.log(e.files[0]);
     }
     return (
         <Dialog
@@ -114,6 +127,12 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
             <Divider />
             <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
                 <Stack p={2} spacing={2}>
+                    <FileUpload onFileSelect={onFileChange} />
+                    {errors.file && (
+                        <span style={errorMsgStyle}>
+                            {errors.file.message}
+                        </span>
+                    )}
                     <Stack>
                         <Typography variant='subtitle2'>Loyalty Name </Typography>
                         <Controller
@@ -133,39 +152,22 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                         />
                     </Stack>
                     <Stack direction={'column'}>
-                        <Stack direction={'row'} spacing={2} alignItems={'end'}>
-                            <Stack>
-                                <Typography variant='subtitle2'>Brand</Typography>
-                                <input
-                                    accept="image/*"
-                                    style={{ display: 'none' }}
-                                    type="file"
-                                    id='raised-button-file'
-                                    onChange={onFileChange}
-                                />
-                                <label htmlFor="raised-button-file">
-                                    <Button variant="contained" sx={{ textTransform: 'none', height: '40px' }} onClick={() => {
-                                        document.getElementById('raised-button-file').click();
-                                    }}
-                                    >
-                                        Add Logo
-                                    </Button>
-                                </label>
-                            </Stack>
-                            <Controller
-                                name="brand"
-                                control={control}
-                                render={({ field }) => (
-                                    <StyledTextfield placeholder='Enter brand name' {...field} sx={{ flexGrow: 1 }} />
-                                )}
-                                rules={{ required: 'Enter brand name' }}
-                            />
-                        </Stack>
-                        {errors.brand && (
-                            <span style={errorMsgStyle}>
-                                {errors.brand.message}
-                            </span>
-                        )}
+                        <Typography variant='subtitle2'>Brand </Typography>
+                        <Controller
+                            name="brand"
+                            control={control}
+                            render={({ field }) => (
+                                <>
+                                    <StyledSelectField options={brands} placeholder={'select Brand'} {...field} />
+                                    {errors.brand && (
+                                        <span style={errorMsgStyle}>
+                                            {errors.brand.message}
+                                        </span>
+                                    )}
+                                </>
+                            )}
+                            rules={{ required: 'select brand' }}
+                        />
                     </Stack>
                     <Stack>
                         <Stack direction={'row'} spacing={0.5}>

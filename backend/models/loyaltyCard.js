@@ -7,10 +7,11 @@ const LoyaltySchema = new mongoose.Schema({
     trim: true
   },
   brand: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'Brand',
     required: true
   },
-  brand_logo: {
+  image: {
     type: String,
     required: true
   },

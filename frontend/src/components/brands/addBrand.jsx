@@ -5,10 +5,12 @@ import { useForm, Controller } from "react-hook-form";
 import StyledTextfield from '../../ui/styledTextfield';
 import { addCategory, getCategory, updateCategory } from '../../services/category';
 import { toast } from 'react-toastify';
+import { addBrand, updateBrand } from '../../services/brands';
 
-export default function AddCategory({ open, onClose, isUpdate, categoryData, isSubmitted }) {
+export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitted }) {
+    const [selectedFile, setSelectedFile] = useState("")
     const {
-        control,
+        control, 
         handleSubmit,
         setError,
         reset,
@@ -17,22 +19,26 @@ export default function AddCategory({ open, onClose, isUpdate, categoryData, isS
 
     useEffect(() => {
         reset({
-            title: isUpdate ? categoryData["Title"] : "",
+            title: isUpdate ? brandData["Title"] : "",
         })
     }, [open])
 
 
     const onSubmit = (data) => {
         if (isUpdate) {
-            editCategories(data)
+            editBrand(data)
         } else {
-            addCategories(data)
+            addBrands(data)
         }
         console.log(data);
     }
 
-    const addCategories = (data ) => {
-        addCategory(data).then((res) => {
+    const addBrands = (data) => {
+        let dt={
+            logo:'nil',
+            ...data
+        }
+        addBrand(dt).then((res) => {
             if (res.status) {
                 toast.success("Successfully added")
                 isSubmitted()
@@ -43,8 +49,12 @@ export default function AddCategory({ open, onClose, isUpdate, categoryData, isS
         })
     }
 
-    const editCategories = (data) => {
-        updateCategory(categoryData._id, data).then((res) => {
+    const editBrand = (data) => {
+        let dt={
+            logo:'nil',
+            ...data
+        }
+        updateBrand(brandData._id, dt).then((res) => {
             if (res.status) {
                 toast.success("Successfully Upated")
                 isSubmitted()
@@ -53,6 +63,10 @@ export default function AddCategory({ open, onClose, isUpdate, categoryData, isS
         }).catch(error => {
             toast.error(error.response.message)
         })
+    }
+    const onFileChange = (e) => {
+        console.log(e.target.files[0]);
+        setSelectedFile(e.target.files[0])
     }
 
     const dialogClose = () => {
@@ -89,6 +103,24 @@ export default function AddCategory({ open, onClose, isUpdate, categoryData, isS
                             )}
                             rules={{ required: 'Enter Category Name' }}
                         />
+                    </Stack>
+                    <Stack>
+                        <Typography variant='subtitle2'>Logo</Typography>
+                        <input
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            type="file"
+                            id='raised-button-file'
+                            onChange={onFileChange}
+                        />
+                        <label htmlFor="raised-button-file">
+                            <Button variant="contained" sx={{ textTransform: 'none', height: '40px' }} onClick={() => {
+                                document.getElementById('raised-button-file').click();
+                            }}
+                            >
+                                Add Logo
+                            </Button>
+                        </label>
                     </Stack>
                 </Stack>
                 <Stack direction={'row'} justifyContent={"end"} p={2} spacing={2}>

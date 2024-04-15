@@ -8,6 +8,7 @@ import Loyalcard from "../../pages/loyalcard"
 import Dashboard from "../../pages/dashboard"
 import Users from "../../pages/users"
 import Categories from "../../pages/categories"
+import Brands from "../../pages/brands"
 
 export const RoutesConfig = () => {
 
@@ -52,6 +53,10 @@ export const RoutesConfig = () => {
                 {
                     path: 'categories',
                     element: <Categories />,
+                },
+                {
+                    path: 'brands',
+                    element: <Brands />,
                 },
                 {
                     path: '*',

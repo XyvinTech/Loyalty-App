@@ -1,6 +1,7 @@
 const adminController = require('../controllers/adminsController')
 const loyaltyController = require('../controllers/loyalitycardController')
 const categoryController = require('../controllers/categoryController')
+const brandController = require('../controllers/brandController')
 const router = require('express').Router();
 
 //ROUTES
@@ -24,6 +25,16 @@ router.route('/api/category/:id')
     .delete(categoryController.deleteCategory)
 
 
+//brand
+router.route('/api/brand')
+    .get(brandController.getBrand)
+    .post(brandController.createBrand)
+
+router.route('/api/brand/:id')
+    .put(brandController.editBrand)
+    .delete(brandController.deleteBrand)
+
+
 
 //loyalty card
 
@@ -33,7 +44,7 @@ router.route('/api/loyalitycard')
 
 router.route('/api/loyalitycard/:id')
     .put(loyaltyController.editCard)
-    
+
 
 router.get('/api/loyalitycard/admin', loyaltyController.getAllCards)
 
