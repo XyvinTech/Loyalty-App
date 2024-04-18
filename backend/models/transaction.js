@@ -15,8 +15,8 @@ const TransactionSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "active",
-    enum: ["active", "inactive", "expired"],
+    default: "pending",
+    enum: ["success", "failed", "pending"],
     required: true
   },
 }, {

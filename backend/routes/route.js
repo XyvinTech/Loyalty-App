@@ -2,6 +2,8 @@ const adminController = require('../controllers/adminsController')
 const loyaltyController = require('../controllers/loyalitycardController')
 const categoryController = require('../controllers/categoryController')
 const brandController = require('../controllers/brandController')
+const transactionController = require('../controllers/transactionController')
+
 const router = require('express').Router();
 
 //ROUTES
