@@ -6,8 +6,10 @@ import StyledTextfield from '../../ui/styledTextfield';
 import { addCategory, getCategory, updateCategory } from '../../services/category';
 import { toast } from 'react-toastify';
 import { addBrand, updateBrand } from '../../services/brands';
+import StyledDropdown from "../../ui/StyledDropdown.jsx"
 
 export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitted }) {
+    console.log(brandData);
     const [selectedFile, setSelectedFile] = useState("")
     const {
         control, 
@@ -18,11 +20,18 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
     } = useForm()
 
     useEffect(() => {
+        getCategory().then((res) => {
+            if (res.status) {
+                setCategories(res.result.map((item) => ({ label: item.title, value: item._id })))
+            }
+        })
         reset({
             title: isUpdate ? brandData["Title"] : "",
+            category: isUpdate ? brandData["category"] : "",
         })
     }, [open])
 
+    const [categories, setCategories] = useState([])
 
     const onSubmit = (data) => {
         if (isUpdate) {
@@ -30,7 +39,6 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
         } else {
             addBrands(data)
         }
-        console.log(data);
     }
 
     const addBrands = (data) => {
@@ -73,6 +81,7 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
         reset({})
         onClose()
     }
+
     return (
         <Dialog
             open={open}
@@ -93,10 +102,27 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
                             control={control}
                             render={({ field }) => (
                                 <>
-                                    <StyledTextfield placeholder='Enter Category name' {...field} />
+                                    <StyledTextfield placeholder='Enter Brand name' {...field} />
                                     {errors.title && (
                                         <span style={errorMsgStyle}>
                                             {errors.title.message}
+                                        </span>
+                                    )}
+                                </>
+                            )}
+                            rules={{ required: 'Enter Brand Name' }}
+                        />
+                    </Stack>
+                    <Stack>
+                        <Controller
+                            name="category"
+                            control={control}
+                            render={({ field }) => (
+                                <>
+                                    <StyledDropdown label={"Select Category"} options={categories} onChange={(selectedValue) => field.onChange(selectedValue)} value={field.value}/>
+                                    {errors.category && (
+                                        <span style={errorMsgStyle}>
+                                            {errors.category.message}
                                         </span>
                                     )}
                                 </>

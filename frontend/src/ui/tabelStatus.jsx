@@ -15,7 +15,7 @@ const chipColor = (status) => {
 export default function TabelStatus({ title }) {
     return (
         <Chip label={<Typography variant='subtitle2'
-            sx={{ color: 'white', fontWeight: 600, textAlign: 'center' }}>
+            sx={{ color: 'white', fontWeight: 600, textAlign: 'center', width:'100px' }}>
             {title}
         </Typography>} sx={{ backgroundColor: chipColor(title), color: '#fff' }} />
     )

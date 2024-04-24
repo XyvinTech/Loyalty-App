@@ -58,7 +58,7 @@ export default function StyledTable({ header = [], data = [], isAction = false, 
                                                 <Typography variant='subtitle2' sx={{ fontSize: '10px', color: 'primary.textContrast' }}>AED</Typography>
                                             </Stack>
                                         </TableCell>)
-                                    } else if (head.toLowerCase() == "status") {
+                                    } else if (head.toLowerCase() === "status") {
                                         return (<TableCell width={'10%'} key={ind} align='center' ><TabelStatus title={row[`${head}`]} /></TableCell>)
                                     }
                                     return (<TableCell key={ind} >{row[`${head}`]}</TableCell>)
