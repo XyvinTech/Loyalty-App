@@ -6,6 +6,10 @@ const LoyaltySchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  description:{
+    type: String,
+    required: true,
+  },
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref:'Brand',
@@ -15,11 +19,15 @@ const LoyaltySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  vendor: {
+  OTP: {
     type: Number,
     required: true
   },
-  worth: {
+  coin_worth: {
+    type: Number,
+    required: true
+  },
+  coin_cost:{
     type: Number,
     required: true
   },
@@ -31,17 +39,14 @@ const LoyaltySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  categories: String,
   status: {
     type: String,
     default: "active",
     enum: ["active", "inactive", "expired"],
     required: true
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
-  }
+
 }, {
   timestamps: true
 });

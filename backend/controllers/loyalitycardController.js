@@ -76,3 +76,10 @@ exports.editCard = async (req, res) => {
         res.status(500).send(error);
     }
 };
+
+exports.otpCheck = async (req, res) => {
+
+
+    //if success make transaction entry as success as well as reduce the card count
+    //fail make transaction fail
+};

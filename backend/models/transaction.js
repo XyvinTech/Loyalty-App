@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
 const TransactionSchema = new mongoose.Schema({
-  market: {
-    type: String,
-  },
-  loyality: {
+  transaction_id: String,
+  loyality_card: {
     type: mongoose.Schema.Types.ObjectId,
-    ref:'Loyality',
+    ref: 'Loyality',
     required: true
   },
   customer_details: {

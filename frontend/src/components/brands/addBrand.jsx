@@ -9,29 +9,22 @@ import { addBrand, updateBrand } from '../../services/brands';
 import StyledDropdown from "../../ui/StyledDropdown.jsx"
 
 export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitted }) {
-    console.log(brandData);
     const [selectedFile, setSelectedFile] = useState("")
     const {
         control, 
         handleSubmit,
-        setError,
         reset,
         formState: { errors },
     } = useForm()
 
     useEffect(() => {
-        getCategory().then((res) => {
-            if (res.status) {
-                setCategories(res.result.map((item) => ({ label: item.title, value: item._id })))
-            }
-        })
+       
         reset({
             title: isUpdate ? brandData["Title"] : "",
-            category: isUpdate ? brandData["category"] : "",
+          
         })
     }, [open])
 
-    const [categories, setCategories] = useState([])
 
     const onSubmit = (data) => {
         if (isUpdate) {
@@ -113,23 +106,7 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
                             rules={{ required: 'Enter Brand Name' }}
                         />
                     </Stack>
-                    <Stack>
-                        <Controller
-                            name="category"
-                            control={control}
-                            render={({ field }) => (
-                                <>
-                                    <StyledDropdown label={"Select Category"} options={categories} onChange={(selectedValue) => field.onChange(selectedValue)} value={field.value}/>
-                                    {errors.category && (
-                                        <span style={errorMsgStyle}>
-                                            {errors.category.message}
-                                        </span>
-                                    )}
-                                </>
-                            )}
-                            rules={{ required: 'Enter Category Name' }}
-                        />
-                    </Stack>
+                  
                     <Stack>
                         <Typography variant='subtitle2'>Logo</Typography>
                         <input

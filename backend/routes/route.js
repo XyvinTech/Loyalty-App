@@ -50,5 +50,8 @@ router.route('/api/loyalitycard/:id')
 
 router.get('/api/loyalitycard/admin', loyaltyController.getAllCards)
 
+//redeem card
+router.post('/api/redeemcard/otpCheck', loyaltyController.otpCheck)
+
 
 module.exports = router
