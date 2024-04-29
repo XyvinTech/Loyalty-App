@@ -78,8 +78,15 @@ exports.editCard = async (req, res) => {
 };
 
 exports.otpCheck = async (req, res) => {
-
-
-    //if success make transaction entry as success as well as reduce the card count
-    //fail make transaction fail
+    try {
+        const { otp } = req.body
+        const checkOtp = await Loyality.findOne({OTP: otp}).select("coin_worth");
+        if(checkOtp){
+            res.status(200).send({ status: true, message: "OTP verified successfully", data:checkOtp});
+        }else{
+            res.status(400).send({ message: "OTP verification failed"});
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
 };

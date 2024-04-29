@@ -39,7 +39,11 @@ const LoyaltySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  categories: String,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'Category',
+    required: true
+  },
   status: {
     type: String,
     default: "active",
