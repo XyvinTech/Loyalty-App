@@ -1,4 +1,7 @@
-import { AccountBalance, Category, Loyalty, Person, SpaceDashboard, SyncAlt, Work } from "@mui/icons-material";
+import { AccountBalance, Category, Loyalty, Person, SpaceDashboard, SyncAlt, Work ,Logout} from "@mui/icons-material";
+
+
+
 
 export const adminNavActions = [
     {
@@ -35,5 +38,12 @@ export const adminNavActions = [
         title:'Brands',
         href:'dashboard/brands',
         icon: <AccountBalance/>
+    },
+    {
+        title:'Logout',
+        href:'login',
+        icon: <Logout/>,
+  
     }
 ]
+

@@ -15,7 +15,7 @@ import {
   VisibilityOffOutlined,
   VisibilityOutlined,
 } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { login } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
@@ -35,16 +35,22 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     const adminLogin = await login(data);
     if (adminLogin.status) {
-      localStorage.setItem("4ZbQwXtY8uVrN5mP7kL3JhF6", adminLogin.token);
+      localStorage.setItem("token", adminLogin.token);
       navigation("/dashboard/main");
-      console.log(adminLogin);
+      
       toast.success(adminLogin.message);
     } else {
       toast.error(adminLogin.error);
     }
   };
 
+  useEffect(() => {
+
+    localStorage.clear();
+  },[]);
+
   return (
+
     <Box sx={{ width: { xs: "80vw", md: "25vw" } }}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <Stack spacing={2}>
@@ -122,6 +128,7 @@ export default function LoginForm() {
         </Typography>
       </Box>
     </Box>
+
   );
 }
 

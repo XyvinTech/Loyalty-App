@@ -1,7 +1,7 @@
 require("dotenv").config();
 const AWS = require("aws-sdk");
-const { AWS_REGION, AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_BUCKET_NAME } = process.env;
-
+const { AWS_REGION, AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY } = process.env;
+const AWS_BUCKET_NAME = 'image-upload-oxium/loyalty_card'
 AWS.config.update({
   region: AWS_REGION,
   accessKeyId: AWS_ACCESS_KEY,

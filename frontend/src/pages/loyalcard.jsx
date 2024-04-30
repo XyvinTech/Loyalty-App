@@ -12,7 +12,7 @@ const HEADER = [
     'Worth',
     'OTP',
     'Expiry',
-    'Number of Coupen',
+    'Number of Coupons',
     'Category',
     'Status'
 ]
@@ -51,7 +51,7 @@ export default function Loyalcard() {
                 <Typography variant='h6' sx={{ fontWeight: 600, color: 'secondary.contrastText' }}>Loyal Cards</Typography>
                 <Button variant='contained' sx={{backgroundColor:'#c83c4f'}} onClick={() => { setEditStatus(false); setOpen(true) }}>Add Card</Button>
             </Stack>
-            <StyledTable header={HEADER} data={loyalityCards} actions={["Edit"]} isAction onActionClick={handleTableAction} />
+            <StyledTable header={HEADER} data={loyalityCards} actions={["Edit","Delete"]} isAction onActionClick={handleTableAction} />
         </Box>
     )
 }

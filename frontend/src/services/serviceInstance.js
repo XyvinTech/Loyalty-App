@@ -5,7 +5,7 @@ const token = localStorage.getItem("4ZbQwXtY8uVrN5mP7kL3JhF6");
 
 const setupInterceptors = (instance) => {
     instance.interceptors.request.use((config) => {
-      const token = localStorage.getItem("token") ;
+      const token = localStorage.getItem("token") || '' ;
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -23,7 +23,7 @@ const setupInterceptors = (instance) => {
 
 const createAxiosInstance = (baseURL, defaultHeaders = {}) => {
     const instance = axios.create({ baseURL, headers: defaultHeaders });
-    // setupInterceptors(instance);
+    setupInterceptors(instance);
     return instance;
 };
 

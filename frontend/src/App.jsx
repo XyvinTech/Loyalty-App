@@ -12,7 +12,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ToastContainer autoClose={3000} position="bottom-right"/>
+        <ToastContainer autoClose={500} position="bottom-right"/>
         <RouteRenderer />
       </LocalizationProvider>
     </ThemeProvider>

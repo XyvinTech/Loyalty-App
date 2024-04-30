@@ -56,7 +56,7 @@ export default function StyledTable({ header = [], data = [], isAction = false, 
                                         return (<TableCell key={ind}>
                                             <Stack direction={'row'} spacing={1} sx={{ alignItems: 'center' }}>
                                                 <Typography variant='subtitle2'>{row[`${head}`]} </Typography>
-                                                <Typography variant='subtitle2' sx={{ fontSize: '10px', color: 'primary.textContrast' }}>AED</Typography>
+                                                <Typography variant='subtitle2' sx={{ fontSize: '10px', color: 'primary.textContrast' }}>OMR</Typography>
                                             </Stack>
                                         </TableCell>)
                                     } else if (head.toLowerCase() === "status") {
