@@ -11,7 +11,7 @@ exports.getTransactions = async (req, res) => {
                 _id: transac._id,
                 transactionId: transac.transactionId,
                 market: transac.market,
-                loyality: transac.loyality_card.title,
+                loyality: transac.loyality_card._id,
                 amount: transac.loyality_card.coin_worth,
                 customer: transac.clientId,
                 status: transac.status,

@@ -33,3 +33,5 @@ export const CARD_INSTANCE = createAxiosInstance(`${BASE_URL}api/loyalitycard`, 
 export const CATEGORY_INSTANCE = createAxiosInstance(`${BASE_URL}api/category`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 export const BRAND_INSTANCE = createAxiosInstance(`${BASE_URL}api/brand`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 export const TRANSACTION_INSTANCE = createAxiosInstance(`${BASE_URL}api/transaction`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+export const UPLOAD_INSTANCE = createAxiosInstance(`${BASE_URL}api/`, { "Content-Type": "multipart/form-data",  Authorization: `Bearer ${token}`, });
+

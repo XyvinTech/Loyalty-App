@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { getBrand } from '../../services/brands';
 import FileUpload from '../../utils/FileUpload';
+import { uploadFile } from '../../services/upload';
 
 export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSubmitted }) {
     const [selectedFile, setSelectedFile] = useState()
@@ -41,17 +42,23 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
     useEffect(() => {
         reset({
             title: isUpdate ? loyalityData["Name"] : "",
+            description: isUpdate ? loyalityData["description"] : "",
             brand: isUpdate ? loyalityData["Brand"] : "",
-            vendor: isUpdate ? loyalityData["Vendor"] : "",
-            worth: isUpdate ? loyalityData["Worth"] : "",
+            OTP: isUpdate ? loyalityData["OTP"] : "",
+            coin_cost: isUpdate ? loyalityData["coin_cost"] : "",
+            coin_worth: isUpdate ? loyalityData["Worth"] : "",
             expiry: isUpdate ? dayjs(loyalityData["Expiry"]) : null,
             no_of_cards: isUpdate ? loyalityData["Number of Coupen"] : "",
-            category: isUpdate ? loyalityData["Category"] : ""
+            category: isUpdate ? loyalityData["Category"] : "",
         })
     }, [open])
 
 
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
+        if(selectedFile){
+            const url = await uploadFile(selectedFile);
+            data.image = url.data[0].url
+        }
         if (isUpdate) {
             editCard(data)
         } else {
@@ -59,7 +66,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                 setError("file", { type: "manual", message: "Select image for Offer" })
                 return
             }
-            addCard({ brand_logo: "nil", ...data })
+            addCard({ ...data })
         }
         console.log(data);
     }
@@ -68,7 +75,6 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
         let dt = {
             category: category.value,
             brand: brand.value,
-            image:'nil',
             expiry: formatDate(expiry),
             ...data
         }
@@ -88,7 +94,6 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
         let dt = {
             category: category.value,
             brand: brand.value,
-            image:'nil',
             expiry: formatDate(expiry),
             status: status ? "active" : "inactive",
             ...data
@@ -112,7 +117,6 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
 
     const onFileChange = (e) => {
         setSelectedFile(e.files[0])
-        console.log(e.files[0]);
     }
     return (
         <Dialog
@@ -151,6 +155,24 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                             rules={{ required: 'Enter loyalty name' }}
                         />
                     </Stack>
+                    <Stack>
+                        <Typography variant='subtitle2'>Description</Typography>
+                        <Controller
+                            name="description"
+                            control={control}
+                            render={({ field }) => (
+                                <>
+                                    <StyledTextfield placeholder='Enter description' {...field} />
+                                    {errors.description && (
+                                        <span style={errorMsgStyle}>
+                                            {errors.description.message}
+                                        </span>
+                                    )}
+                                </>
+                            )}
+                            rules={{ required: 'Enter description' }}
+                        />
+                    </Stack>
                     <Stack direction={'column'}>
                         <Typography variant='subtitle2'>Brand </Typography>
                         <Controller
@@ -172,35 +194,50 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                     <Stack>
                         <Stack direction={'row'} spacing={0.5}>
                             <Stack flexGrow={1}>
-                                <Typography variant='subtitle2'>Vendor Code</Typography>
+                                <Typography variant='subtitle2'>OTP Code</Typography>
                                 <Controller
-                                    name="vendor"
+                                    name="OTP"
                                     control={control}
                                     render={({ field }) => (
-                                        <StyledTextfield placeholder='Enter vendor code' {...field} sx={{ flexGrow: 1 }} />
+                                        <StyledTextfield placeholder='Enter otp code' {...field} sx={{ flexGrow: 1 }} />
                                     )}
-                                    rules={{ required: 'Enter vendor code' }}
+                                    rules={{ required: 'Enter otp code' }}
                                 />
-                                {errors.vendor && (
+                                {errors.OTP && (
                                     <span style={errorMsgStyle}>
-                                        {errors.vendor.message}
+                                        {errors.OTP.message}
                                     </span>
                                 )}
                             </Stack>
-
+                            <Stack flexGrow={1}>
+                                <Typography variant='subtitle2'>Cost</Typography>
+                                <Controller
+                                    name="coin_cost"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <StyledTextfield placeholder='Enter cost' {...field} sx={{ flexGrow: 1 }} rightIcon={'AED'} />
+                                    )}
+                                    rules={{ required: 'Enter cost' }}
+                                />
+                                {errors.coin_cost && (
+                                    <span style={errorMsgStyle}>
+                                        {errors.coin_cost.message}
+                                    </span>
+                                )}
+                            </Stack>
                             <Stack flexGrow={1}>
                                 <Typography variant='subtitle2'>Worth</Typography>
                                 <Controller
-                                    name="worth"
+                                    name="coin_worth"
                                     control={control}
                                     render={({ field }) => (
                                         <StyledTextfield placeholder='Enter worth' {...field} sx={{ flexGrow: 1 }} rightIcon={'AED'} />
                                     )}
                                     rules={{ required: 'Enter worth' }}
                                 />
-                                {errors.worth && (
+                                {errors.coin_worth && (
                                     <span style={errorMsgStyle}>
-                                        {errors.worth.message}
+                                        {errors.coin_worth.message}
                                     </span>
                                 )}
                             </Stack>

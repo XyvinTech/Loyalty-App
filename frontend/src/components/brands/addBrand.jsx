@@ -7,6 +7,7 @@ import { addCategory, getCategory, updateCategory } from '../../services/categor
 import { toast } from 'react-toastify';
 import { addBrand, updateBrand } from '../../services/brands';
 import StyledDropdown from "../../ui/StyledDropdown.jsx"
+import { uploadFile } from '../../services/upload.js';
 
 export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitted }) {
     const [selectedFile, setSelectedFile] = useState("")
@@ -21,12 +22,15 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
        
         reset({
             title: isUpdate ? brandData["Title"] : "",
-          
         })
     }, [open])
 
 
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
+        if(selectedFile){
+            const url = await uploadFile(selectedFile);
+            data.logo = url.data[0].url
+        }
         if (isUpdate) {
             editBrand(data)
         } else {
@@ -36,7 +40,6 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
 
     const addBrands = (data) => {
         let dt={
-            logo:'nil',
             ...data
         }
         addBrand(dt).then((res) => {
@@ -52,7 +55,6 @@ export default function AddBrand({ open, onClose, isUpdate, brandData, isSubmitt
 
     const editBrand = (data) => {
         let dt={
-            logo:'nil',
             ...data
         }
         updateBrand(brandData._id, dt).then((res) => {

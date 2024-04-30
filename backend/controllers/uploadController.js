@@ -5,8 +5,8 @@ exports.uploadImage = async function (req, res) {
   if (files.length > 0) {
     const response = await uploadFilesToS3(files);
     if (response.status) {
-      res.status(200).json({ status: true, message: "ok", data: response.results });
+      return res.status(200).json({ status: true, message: "ok", data: response.results });
     }
   }
-  res.status(400).json({ message: "Image upload failed" });
+  return res.status(400).json({ message: "Image upload failed" });
 };

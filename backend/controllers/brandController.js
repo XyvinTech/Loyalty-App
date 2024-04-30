@@ -39,7 +39,7 @@ exports.getBrand = async (req, res) => {
 // edit title of category
 exports.editBrand = async (req, res) => {
     try {
-        await Brand.findByIdAndUpdate({ _id: req.params.id },req.body.title)
+        await Brand.findByIdAndUpdate({ _id: req.params.id },req.body)
         res.status(200).send({status:true,message:"Successfully edited"});
     } catch (error) {
         res.status(500).send(error);
