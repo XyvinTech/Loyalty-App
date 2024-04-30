@@ -45,7 +45,7 @@ const Sidebar = ({ open, onClose, ...props }) => {
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          backgroundColor: 'secondary.main'
+          backgroundColor: '#F9FAFB'
         }}
       >
         <Box sx={{ p: 4 }}>
