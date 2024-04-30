@@ -56,8 +56,8 @@ export default function Navbar(props) {
 
         <Stack direction="row" spacing={2} alignItems="center">
           <Stack sx={{ alignItems: 'end' }}>
-            <Typography variant='subtitle1' sx={{ color: '#2a5f44', fontWeight: 500, lineHeight: '10px' }}>Name</Typography>
-            <Typography variant="caption" sx={{ color: '#555'}}>Admin</Typography>
+            <Typography variant='subtitle1' sx={{ color: '#2a5f44', fontWeight: 500, lineHeight: '10px' }}>Admin</Typography>
+            {/* <Typography variant="caption" sx={{ color: '#555'}}>Admin</Typography> */}
           </Stack>
           <Avatar alt="Gausul Haque"  /> {/* Replace '/path-to-your-image.jpg' with the path to your user's avatar image */}
         </Stack>

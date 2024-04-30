@@ -172,14 +172,14 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                     <Stack>
                         <Stack direction={'row'} spacing={0.5}>
                             <Stack flexGrow={1}>
-                                <Typography variant='subtitle2'>Vendor Code</Typography>
+                                <Typography variant='subtitle2'>Vendor OTP</Typography>
                                 <Controller
                                     name="vendor"
                                     control={control}
                                     render={({ field }) => (
                                         <StyledTextfield placeholder='Enter vendor code' {...field} sx={{ flexGrow: 1 }} />
                                     )}
-                                    rules={{ required: 'Enter vendor code' }}
+                                    rules={{ required: 'Enter 4 digit vendor code' }}
                                 />
                                 {errors.vendor && (
                                     <span style={errorMsgStyle}>
@@ -194,7 +194,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                                     name="worth"
                                     control={control}
                                     render={({ field }) => (
-                                        <StyledTextfield placeholder='Enter worth' {...field} sx={{ flexGrow: 1 }} rightIcon={'AED'} />
+                                        <StyledTextfield placeholder='Enter worth' {...field} sx={{ flexGrow: 1 }} rightIcon={'OMR'} />
                                     )}
                                     rules={{ required: 'Enter worth' }}
                                 />

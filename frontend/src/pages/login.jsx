@@ -10,9 +10,10 @@ export default function Login() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh'
+                height: '100vh',
+                backgroundColor: '#f9ced5'
             }}>
-            <Box sx={{ borderRadius: '8px',p:4,boxShadow:'0 0 6px #5559' }}>
+            <Box sx={{ borderRadius: '8px',p:4,boxShadow:'0 0 6px #5559', backgroundColor:'#ffffff' }}>
                 <Box sx={{mt:1,mb:5}}>
 
                     <img width={'100%'} height={'50px'} style={{objectFit:'contain'}} src={logo} alt="logo" />
