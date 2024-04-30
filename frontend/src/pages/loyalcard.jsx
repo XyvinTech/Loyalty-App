@@ -49,7 +49,7 @@ export default function Loyalcard() {
             <Stack direction={"row"}
                 sx={{ p: 2, justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', borderRadius: '4px', boxShadow: '0 0 15px #ccc' }}>
                 <Typography variant='h6' sx={{ fontWeight: 600, color: 'secondary.contrastText' }}>Loyal Cards</Typography>
-                <Button variant='contained' onClick={() => { setEditStatus(false); setOpen(true) }}>Add Card</Button>
+                <Button variant='contained' sx={{backgroundColor:'#c83c4f'}} onClick={() => { setEditStatus(false); setOpen(true) }}>Add Card</Button>
             </Stack>
             <StyledTable header={HEADER} data={loyalityCards} actions={["Edit"]} isAction onActionClick={handleTableAction} />
         </Box>

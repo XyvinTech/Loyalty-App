@@ -3,6 +3,7 @@ import { Box, Button, Drawer, Stack, Typography, styled, useMediaQuery } from "@
 import { useNavigate } from "react-router-dom";
 import { adminNavActions } from "../assets/json/navbar";
 import React from "react";
+import logo from '../assets/logo/logo-red-trans.png';
 
 const Sidebar = ({ open, onClose, ...props }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"))
@@ -18,21 +19,21 @@ const Sidebar = ({ open, onClose, ...props }) => {
       <Stack direction={"row"}
         spacing={1}
         sx={{
-          backgroundColor: act && 'secondary.light',
+          backgroundColor: act && '#c83c4f',
           cursor: 'pointer',
           py: 0.8, px: 1, borderRadius: '8px',
           justifyContent: 'flex-start',
           alignItems: 'center',
-          color: act ? '#fff' : '#999',
+          color: act ? '#fff' : '#555252',
           textTransform: 'none',
           '&:hover': {
-            backgroundColor: 'secondary.light',
+            backgroundColor: '#c83c4f',
             color: '#fff'
           }
         }}
         {...props}
       >
-        <Box sx={{ color: act && 'primary.light',display:'flex',justifyContent:'center',alignItems:'center' }}>{item.icon}</Box>
+        <Box sx={{ color: act && '#ffff',display:'flex',justifyContent:'center',alignItems:'center' }}>{item.icon}</Box>
         <Typography variant="subtitle2" > {item.title}</Typography>
       </Stack>
     )
@@ -51,7 +52,7 @@ const Sidebar = ({ open, onClose, ...props }) => {
         <Box sx={{ p: 4 }}>
           <Stack direction={'row'} sx={{ alignItems: 'center', p: 2 }}>
             {/* This icon can be replaced with your logo */}
-            <img height={'50px'} src='https://www.pngkey.com/png/full/529-5291672_sample-logo-png-transparent-background.png' />
+            <img height={'60px'} src={logo} alt="logo"/>
           </Stack>
         </Box>
         <Box
