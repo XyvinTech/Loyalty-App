@@ -40,7 +40,7 @@ exports.adminSignIn = async (req, res) => {
     try {
         const admin = await Admin.findOne({ email: req.body.email });
         if (!admin) {
-            return res.status(404).send({ error: 'Login failed!' });
+            return res.status(402).send({ error: 'Login failed!' });
         }
 
         const isPasswordMatch = await comparePassword(req.body.password, admin.password_hash);
