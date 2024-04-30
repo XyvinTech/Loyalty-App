@@ -14,10 +14,6 @@ const AdminSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  contact: {
-    type: String,
-    required: true
-  }
 },{
     timestamps: true,
 });

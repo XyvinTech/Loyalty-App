@@ -3,13 +3,13 @@ const { hashPassword, comparePassword } = require('../utils/bcrypt');
 const Admin = require('../models/Admin');
 const { randomPassword } = require('../utils/password');
 const { sendNewPasswordMail, validateEmail } = require('../utils/email_sender');
+const generateToken = require('../utils/generateToken');
 
 
 // Create a new admin
 exports.createAdmin = async (req, res) => {
     try {
-        const password = randomPassword();
-        const hashedPassword = await hashPassword(password);
+        // const password = randomPassword();
         const adminsame = await Admin.findOne({ email: req.body.email });
         console.log(validateEmail(req.body.email));
         if (!validateEmail(req.body.email)) {
@@ -18,15 +18,16 @@ exports.createAdmin = async (req, res) => {
         if (adminsame) {
             return res.status(400).send({status:false,error:'Email already Registered'});
         }
+        const hashedPassword = await hashPassword(req.body.password);
         const admin = new Admin({
             ...req.body,
             password_hash: hashedPassword,
         });
-        await sendNewPasswordMail(req.body.name, req.body.email, password)
+        // await sendNewPasswordMail(req.body.name, req.body.email, password)
 
         await admin.save();
         // const token = await signAccessToken(admin._id, admin.role, admin.email);
-        delete admin["password_hash"]
+        // delete admin["password_hash"]
         res.status(201).send({status : true ,data: admin /*,token */});
     } catch (error) {
         console.log("got error", error);
@@ -46,9 +47,8 @@ exports.adminSignIn = async (req, res) => {
         if (!isPasswordMatch) {
             return res.status(400).send({ error: 'Login failed!' });
         }
-
-        const token = await signAccessToken(admin._id, admin.role, admin.email);
-        res.send({ admin, token });
+        const token = await generateToken(admin._id)
+        res.status(200).json({ status: true, token, message: "Login success!" });
     } catch (error) {
         res.status(500).send(error);
     }

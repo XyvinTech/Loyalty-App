@@ -1,4 +1,5 @@
 const Category = require('../models/category')
+const moment = require('moment');
 
 // jobsController.js
 
@@ -22,7 +23,13 @@ exports.createCategory = async (req, res) => {
 exports.getCategory = async (req, res) => {
     try {
         const category = await Category.find();
-        res.status(200).send({status:true,result:category});
+        let formatData = category.map(cat => (
+            {
+                _id: cat._id,
+                title: cat.title,
+                createdAt: moment.utc(cat.createdAt).format("D/M/YYYY"),
+            }))
+        res.status(200).send({status:true,result:formatData});
     } catch (error) {
         res.status(500).send(error);
     }

@@ -1,4 +1,5 @@
 const Brand = require('../models/brand')
+const moment = require('moment');
 
 // jobsController.js
 
@@ -21,8 +22,15 @@ exports.createBrand = async (req, res) => {
 // Get category
 exports.getBrand = async (req, res) => {
     try {
-        const brand = await Brand.find();
-        res.status(200).send({status:true,result:brand});
+        const brands = await Brand.find()
+        let formatData = brands.map(brand => (
+            {
+                _id: brand._id,
+                title: brand.title,
+                logo: brand.logo,
+                createdAt: moment.utc(brand.createdAt).format("D/M/YYYY"),
+            }))
+        res.status(200).send({status:true,result:formatData});
     } catch (error) {
         res.status(500).send(error);
     }
