@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.3572f698.css",
-    "main.js": "/static/js/main.1969c2fc.js",
+    "main.js": "/static/js/main.70b2ed3f.js",
     "static/media/logo-red-trans.png": "/static/media/logo-red-trans.a55db01950b05eb8b368.png",
     "index.html": "/index.html",
     "main.3572f698.css.map": "/static/css/main.3572f698.css.map",
-    "main.1969c2fc.js.map": "/static/js/main.1969c2fc.js.map"
+    "main.70b2ed3f.js.map": "/static/js/main.70b2ed3f.js.map"
   },
   "entrypoints": [
     "static/css/main.3572f698.css",
-    "static/js/main.1969c2fc.js"
+    "static/js/main.70b2ed3f.js"
   ]
 }

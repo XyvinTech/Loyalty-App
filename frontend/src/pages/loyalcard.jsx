@@ -6,10 +6,11 @@ import { getLoyalityCard } from '../services/loyaltyCard'
 import { tableHeaderReplace } from '../utils/tableHeaderReplace'
 
 const HEADER = [
-    'Title',
+    'Logo',
+    'Name',
     'Brand',
     'Worth',
- 
+    'OTP',
     'Expiry',
     'Number of Coupons',
     'Category',
@@ -29,8 +30,7 @@ export default function Loyalcard() {
     const init = () => {
         getLoyalityCard().then((res) => {
             if (res.status) {
-                console.log(res.result);
-                setLoyalityCards(tableHeaderReplace(res.result, ['title', 'brand', 'worth',  'expiry', 'no_of_cards', 'category', 'status'], HEADER))
+                setLoyalityCards(tableHeaderReplace(res.result, ['image', 'title', 'brand', 'coin_worth', 'OTP', 'expiry', 'no_of_cards', 'category', 'status'], HEADER))
             }
         })
     }

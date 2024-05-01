@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import AddBrand from '../components/brands/addBrand'
 
 const HEADER = [
+    'Logo',
     'Title',
     'created on',
 ]
@@ -25,8 +26,7 @@ export default function Brands() {
     const init = () => {
         getBrand().then((res) => {
             if (res.status) {
-                console.log(res.result);
-                setBrandData(tableHeaderReplace(res.result, ['title', 'createdAt'], HEADER))
+                setBrandData(tableHeaderReplace(res.result, [ 'logo', 'title', 'createdAt'], HEADER))
             }
         })
     }
