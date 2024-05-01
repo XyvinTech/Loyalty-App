@@ -9,7 +9,7 @@ const verifyToken = require("../middleware/verifyUser");
 
 //~ Define a filter function for multer file uploads
 const filter = (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png"|| file.mimetype === "image/webp") {
       cb(null, true);
     } else {
       cb(new Error("Invalid file type, only JPEG, PNG and PDF is allowed!"), false);
