@@ -2,6 +2,7 @@ const Loyality = require("../models/loyaltyCard");
 const moment = require("moment");
 const { v4: uuidv4 } = require("uuid");
 const Transaction = require("../models/transaction");
+const Category = require("../models/category");
 // jobsController.js
 
 // Create a new job
@@ -60,9 +61,21 @@ exports.getAllCards = async (req, res) => {
 // Get active cards for users with category filter
 exports.getCards = async (req, res) => {
   const match = {};
+  console.log(req.query)
   if (req.query.category) {
-    match.category = req.query.category;
+    try {
+
+      const category = await Category.findOne({ title: req.query.category });
+      if (!category) {
+        return res.status(404).send('Category not found');
+      }
+      match.category = category._id;
+    } catch (err) {
+      return res.status(500).send('Error fetching category');
+    }
   }
+
+
   try {
     const loyaltyCard = await Loyality.find(match).populate("category").populate("brand");
     let formatData = loyaltyCard.filter((card) => {
@@ -81,11 +94,13 @@ exports.getCards = async (req, res) => {
         };
       }
     });
-    res.status(200).send({ status: true, result: formatData });
+    res.status(200).send({ status: true, result: formatData,messege:"ok" });
   } catch (error) {
     res.status(500).send(error);
   }
-};
+
+}
+
 
 exports.editCard = async (req, res) => {
   try {
