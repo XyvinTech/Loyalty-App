@@ -115,6 +115,15 @@ exports.editCard = async (req, res) => {
   }
 };
 
+exports.getCardById = async (req, res) => {
+  try {
+    const data = await Loyality.findById({ _id: req.params.id });
+    res.status(200).send({ status: true, data });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 exports.otpCheck = async (req, res) => {
   try {
     const { loyalityId, otp, clientId, note } = req.body;

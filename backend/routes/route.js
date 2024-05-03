@@ -60,6 +60,7 @@ router.route('/api/loyalitycard')
 
 router.route('/api/loyalitycard/:id')
     .put(verifyToken, loyaltyController.editCard)
+    .get(verifyToken, loyaltyController.getCardById)
 
 
 router.get('/api/loyalitycard/admin',verifyToken, loyaltyController.getAllCards)
