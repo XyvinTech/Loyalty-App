@@ -1,17 +1,6 @@
 {
   "files": {
     "main.css": "/static/css/main.3572f698.css",
-<<<<<<< HEAD
-    "main.js": "/static/js/main.11aa2fba.js",
-    "static/media/logo-red-trans.png": "/static/media/logo-red-trans.a55db01950b05eb8b368.png",
-    "index.html": "/index.html",
-    "main.3572f698.css.map": "/static/css/main.3572f698.css.map",
-    "main.11aa2fba.js.map": "/static/js/main.11aa2fba.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.3572f698.css",
-    "static/js/main.11aa2fba.js"
-=======
     "main.js": "/static/js/main.941828f2.js",
     "static/media/logo-red-trans.png": "/static/media/logo-red-trans.a55db01950b05eb8b368.png",
     "index.html": "/index.html",
@@ -21,6 +10,5 @@
   "entrypoints": [
     "static/css/main.3572f698.css",
     "static/js/main.941828f2.js"
->>>>>>> ae4574ce0538e879a317d6e2bfb0ca1a6a7b8148
   ]
 }
