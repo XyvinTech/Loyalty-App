@@ -48,7 +48,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
             coin_cost: isUpdate ? loyalityData["coin_cost"] : "",
             coin_worth: isUpdate ? loyalityData["Worth"] : "",
             expiry: isUpdate ? dayjs(loyalityData["Expiry"]) : null,
-            no_of_cards: isUpdate ? loyalityData["Number of Coupen"] : "",
+            no_of_cards: isUpdate ? loyalityData["Number of Coupons"] : "",
             category: isUpdate ? loyalityData["Category"] : "",
         })
     }, [open])
@@ -131,7 +131,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
             <Divider />
             <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
                 <Stack p={2} spacing={2}>
-                    <FileUpload onFileSelect={onFileChange} />
+                    <FileUpload onFileSelect={onFileChange}  image={isUpdate ? loyalityData["Logo"] : null} />
                     {errors.file && (
                         <span style={errorMsgStyle}>
                             {errors.file.message}

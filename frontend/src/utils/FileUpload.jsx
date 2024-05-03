@@ -8,7 +8,7 @@ export default function FileUpload({ onFileSelect, image, accept,getBase64Data,r
   const [fileStatus, setFileStatus] = useState(false)
   const [fileData,setFileData] = useState()
   const { getRootProps, getInputProps } = useDropzone({
-    accept: accept ? accept : {'image/*' : ['.png','.jpeg','.jpg']},
+    accept: accept ? accept : {'image/*' : ['.png','.jpeg','.jpg','.webp']},
     multiple: false,
     onDrop: (acceptedFiles) => {
       setFileStatus(true)
@@ -20,6 +20,14 @@ export default function FileUpload({ onFileSelect, image, accept,getBase64Data,r
       })
     }
   });
+
+  useEffect(() => {
+    // Set initial image if provided
+    if (image) {
+        setFileData(image);
+        setFileStatus(true);
+    }
+}, [image]);
 
   useEffect(() => {
     if (removedFile) {
