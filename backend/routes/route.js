@@ -81,4 +81,6 @@ router.post(
         uploadController.uploadImage
       );
 
+router.get("/api/cards/brand", verifyToken, loyaltyController.getCardByBrand);
+
 module.exports = router
