@@ -3,7 +3,7 @@ import { Box, Button, Drawer, Stack, Typography, styled, useMediaQuery } from "@
 import { useNavigate } from "react-router-dom";
 import { adminNavActions } from "../assets/json/navbar";
 import React from "react";
-import logo from '../assets/logo/logo-red-trans.png';
+import logo from '../assets/logo/logo-new.jpeg';
 
 const Sidebar = ({ open, onClose, ...props }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"))
@@ -49,10 +49,10 @@ const Sidebar = ({ open, onClose, ...props }) => {
           backgroundColor: '#F9FAFB'
         }}
       >
-        <Box sx={{ p: 4 }}>
-          <Stack direction={'row'} sx={{ alignItems: 'center', p: 2 }}>
+        <Box sx={{ p: 2}}>
+          <Stack direction={'row'} sx={{ alignItems: 'center'}}>
             {/* This icon can be replaced with your logo */}
-            <img height={'60px'} src={logo} alt="logo"/>
+            <img style={{borderRadius:'50%'}} height={'160px'} src={logo} alt="logo"/>
           </Stack>
         </Box>
         <Box

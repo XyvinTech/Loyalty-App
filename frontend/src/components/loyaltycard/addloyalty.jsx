@@ -138,7 +138,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                         </span>
                     )}
                     <Stack>
-                        <Typography variant='subtitle2'>Loyalty Name </Typography>
+                        <Typography variant='subtitle2'>Loyalty Card Name </Typography>
                         <Controller
                             name="title"
                             control={control}
@@ -194,7 +194,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                     <Stack>
                         <Stack direction={'row'} spacing={0.5}>
                             <Stack flexGrow={1}>
-                                <Typography variant='subtitle2'>Vendor OTP</Typography>
+                                <Typography variant='subtitle2'> OTP</Typography>
                                 <Controller
                                     name="OTP"
                                     control={control}
@@ -210,12 +210,12 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                                 )}
                             </Stack>
                             <Stack flexGrow={1}>
-                                <Typography variant='subtitle2'>Cost</Typography>
+                                <Typography variant='subtitle2'>Coins</Typography>
                                 <Controller
                                     name="coin_cost"
                                     control={control}
                                     render={({ field }) => (
-                                        <StyledTextfield placeholder='Enter cost' {...field} sx={{ flexGrow: 1 }} rightIcon={'AED'} />
+                                        <StyledTextfield placeholder='Enter coins' {...field} sx={{ flexGrow: 1 }}  />
                                     )}
                                     rules={{ required: 'Enter cost' }}
                                 />
@@ -226,7 +226,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                                 )}
                             </Stack>
                             <Stack flexGrow={1}>
-                                <Typography variant='subtitle2'>Worth</Typography>
+                                <Typography variant='subtitle2'>Currency Worth</Typography>
                                 <Controller
                                     name="coin_worth"
                                     control={control}
@@ -263,7 +263,7 @@ export default function AddLoyalty({ open, onClose, isUpdate, loyalityData, isSu
                             />
                         </Stack>
                         <Stack flexGrow={1}>
-                            <Typography variant='subtitle2'>Expiry</Typography>
+                            <Typography variant='subtitle2'>Validity</Typography>
                             <Controller
                                 name="expiry"
                                 control={control}
