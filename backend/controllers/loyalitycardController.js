@@ -60,47 +60,40 @@ exports.getAllCards = async (req, res) => {
 
 // Get active cards for users with category filter
 exports.getCards = async (req, res) => {
-  const match = {};
-  console.log(req.query)
+  const match = {
+    status: "active",
+  };
+  console.log(req.query);
   if (req.query.category) {
     try {
-
       const category = await Category.findOne({ title: req.query.category });
       if (!category) {
-        return res.status(404).send('Category not found');
+        return res.status(404).send("Category not found");
       }
       match.category = category._id;
     } catch (err) {
-      return res.status(500).send('Error fetching category');
+      return res.status(500).send("Error fetching category");
     }
   }
 
-
   try {
-    const loyaltyCard = await Loyality.find(match).populate("category").populate("brand");
-    let formatData = loyaltyCard.filter((card) => {
-      if (moment() <= moment(card.expiry, "D/M/YYYY")) {
-        return {
-          _id: card._id,
-          title: card.title,
-          brand: card.brand.title,
-          brand_logo: card.brand.logo,
-          image: card.image,
-          vendor: card.vendor,
-          worth: card.worth,
-          expiry: card.expiry,
-          no_of_cards: card.no_of_cards,
-          category: card.category.title,
-        };
-      }
-    });
-    res.status(200).send({ status: true, result: formatData,messege:"ok" });
+    const loyaltyCards = await Loyality.find(match).populate("category").populate("brand");
+    let formattedData = loyaltyCards
+      .filter((card) => moment().format("D/M/YYYY") >= card.expiry)
+      .map((card) => ({
+        _id: card._id,
+        title: card.title,
+        description: card.description,
+        brand: card.brand ? card.brand.title : "",
+        brand_logo: card.brand ? card.brand.logo : "",
+        image: card.image,
+        category: card.category ? card.category.title : "",
+      }));
+    res.status(200).send({ status: true, result: formattedData, messege: "ok" });
   } catch (error) {
     res.status(500).send(error);
   }
-
-}
-
+};
 
 exports.editCard = async (req, res) => {
   try {
@@ -110,6 +103,15 @@ exports.editCard = async (req, res) => {
       useFindAndModify: false,
     });
     res.status(200).send({ status: true, message: "Updated Successfully" });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.getCardById = async (req, res) => {
+  try {
+    const data = await Loyality.findById({ _id: req.params.id });
+    res.status(200).send({ status: true, data });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -138,3 +140,43 @@ exports.otpCheck = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.getCardByBrand = async (req, res)=>{
+  try {
+    const { category } = req.query;
+    let filter = {};
+    if(category){
+      filter.category = category;
+    }
+    const findCard = await Loyality.find(filter).populate("brand");
+        const cardsByBrandId = {};
+
+        findCard.forEach((card) => {
+          const brandId = card.brand ? card.brand._id.toString() : 'Unknown';
+    
+          if (!cardsByBrandId[brandId]) {
+            cardsByBrandId[brandId] = [];
+          }
+    
+          cardsByBrandId[brandId].push({
+            _id: card._id,
+            title: card.title,
+            description: card.description,
+            brandId: brandId,
+            brandName: card.brand ? card.brand.title : 'Unknown',
+            brand_logo: card.brand ? card.brand.logo : null,
+            image: card.image,
+            category: card.category ? card.category.title : 'Unknown'
+          });
+        });
+    
+        const arrangedData = Object.keys(cardsByBrandId).map((brandId) => ({
+          brandName: cardsByBrandId[brandId][0].brandName,
+          cards: cardsByBrandId[brandId]
+        }));
+    
+    res.status(200).send({ status: true, result: arrangedData, messege: "ok" });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}

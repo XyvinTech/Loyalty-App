@@ -50,19 +50,21 @@ router.route('/api/brand/:id')
     .put(verifyToken, brandController.editBrand)
     .delete(verifyToken, brandController.deleteBrand)
 
-
-
-//loyalty card
-
+    
+    
+    //loyalty card
+    
 router.route('/api/loyalitycard')
     .get(verifyToken, loyaltyController.getCards)
     .post(verifyToken, loyaltyController.createCard)
+    
+router.get('/api/loyalitycard/admin',verifyToken, (loyaltyController.getAllCards))
 
 router.route('/api/loyalitycard/:id')
     .put(verifyToken, loyaltyController.editCard)
+    .get(verifyToken, loyaltyController.getCardById)
 
 
-router.get('/api/loyalitycard/admin',verifyToken, loyaltyController.getAllCards)
 
 //redeem card
 router.post('/api/redeemcard/otpCheck', verifyToken, loyaltyController.otpCheck)
@@ -78,5 +80,7 @@ router.post(
         verifyToken,
         uploadController.uploadImage
       );
+
+router.get("/api/cards/brand", verifyToken, loyaltyController.getCardByBrand);
 
 module.exports = router
