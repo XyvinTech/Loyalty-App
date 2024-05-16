@@ -3,12 +3,14 @@ const moment = require("moment");
 const { v4: uuidv4 } = require("uuid");
 const Transaction = require("../models/transaction");
 const Category = require("../models/category");
+const { log } = require("console");
 // jobsController.js
 
 // Create a new job
 exports.createCard = async (req, res) => {
   try {
     const loyaltyCard = new Loyality(req.body);
+    log(req.body)
     await loyaltyCard.save();
     res.status(201).send({ status: true, result: loyaltyCard });
   } catch (error) {
@@ -180,3 +182,9 @@ exports.getCardByBrand = async (req, res)=>{
     res.status(500).send(error);
   }
 }
+
+exports.deleteCard = async(req, res) => {
+  let id = req.params.id
+  await Loyality.findByIdAndDelete(id)
+  res.status(200).send({"data":"Deleted Successfully"})
+};

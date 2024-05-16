@@ -9,14 +9,14 @@ const verifyToken = require("../middleware/verifyUser");
 
 //~ Define a filter function for multer file uploads
 const filter = (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png"|| file.mimetype === "image/webp") {
-      cb(null, true);
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/webp") {
+        cb(null, true);
     } else {
-      cb(new Error("Invalid file type, only JPEG, PNG and PDF is allowed!"), false);
+        cb(new Error("Invalid file type, only JPEG, PNG and PDF is allowed!"), false);
     }
-  };
-  //~ Create a multer instance with the defined filter
-  const upload = multer({ fileFilter: filter });
+};
+//~ Create a multer instance with the defined filter
+const upload = multer({ fileFilter: filter });
 
 const router = require('express').Router();
 
@@ -25,10 +25,10 @@ const router = require('express').Router();
 // admin
 router.post('/api/admins/login', (adminController.adminSignIn))
 router.post('/api/admins', (adminController.createAdmin))
-router.get('/api/admins',verifyToken, (adminController.getAllAdmin))
-router.get('/api/admins/:id',verifyToken, (adminController.getAdminDetails))
-router.put('/api/admins/:id',verifyToken, (adminController.editAdminDetails))
-router.delete('/api/admins/:id',verifyToken, (adminController.deleteAdminDetails))
+router.get('/api/admins', verifyToken, (adminController.getAllAdmin))
+router.get('/api/admins/:id', verifyToken, (adminController.getAdminDetails))
+router.put('/api/admins/:id', verifyToken, (adminController.editAdminDetails))
+router.delete('/api/admins/:id', verifyToken, (adminController.deleteAdminDetails))
 
 
 //category
@@ -50,19 +50,21 @@ router.route('/api/brand/:id')
     .put(verifyToken, brandController.editBrand)
     .delete(verifyToken, brandController.deleteBrand)
 
-    
-    
-    //loyalty card
-    
+
+
+//loyalty card
+
 router.route('/api/loyalitycard')
     .get(verifyToken, loyaltyController.getCards)
     .post(verifyToken, loyaltyController.createCard)
-    
-router.get('/api/loyalitycard/admin',verifyToken, (loyaltyController.getAllCards))
+
+router.get('/api/loyalitycard/admin', verifyToken, (loyaltyController.getAllCards))
 
 router.route('/api/loyalitycard/:id')
     .put(verifyToken, loyaltyController.editCard)
     .get(verifyToken, loyaltyController.getCardById)
+    .delete(verifyToken, loyaltyController.deleteCard)
+
 
 
 
@@ -75,11 +77,11 @@ router.route('/api/transaction')
 
 //upload
 router.post(
-        "/api/upload",
-        upload.array("attachment"),
-        verifyToken,
-        uploadController.uploadImage
-      );
+    "/api/upload",
+    upload.array("attachment"),
+    verifyToken,
+    uploadController.uploadImage
+);
 
 router.get("/api/cards/brand", verifyToken, loyaltyController.getCardByBrand);
 

@@ -31,12 +31,20 @@ const LoyaltySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  starts_from:{
+    type: String,
+    required: true
+  },
   expiry: {
     type: String,
     required: true
   },
   no_of_cards: {
     type: Number,
+    required: true,
+  },
+  availability_criteria:{
+    type: String,
     required: true,
   },
   category: {

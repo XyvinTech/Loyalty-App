@@ -33,3 +33,22 @@ export async function getLoyalityCard() {
         throw error;
     }
 }
+
+export async function getLoyalityCardById(id) {
+    try {
+        const response = await CARD_INSTANCE.get(`${id}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+export async function deleteLoyalityCard(id) {
+    try {
+        const response = await CARD_INSTANCE.delete(`${id}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
