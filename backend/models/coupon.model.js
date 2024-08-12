@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const LoyaltySchema = new mongoose.Schema({
+const CouponSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -23,7 +23,7 @@ const LoyaltySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  coin_worth: {
+  points_required: {
     type: Number,
     required: true
   },
@@ -55,7 +55,7 @@ const LoyaltySchema = new mongoose.Schema({
   status: {
     type: String,
     default: "active",
-    enum: ["active", "inactive", "expired"],
+    enum: ["active", "inactive", "expired","limit exceeded"],
     required: true
   },
 
@@ -63,4 +63,4 @@ const LoyaltySchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Loyality', LoyaltySchema);
+module.exports = mongoose.model('coupon', CouponSchema);

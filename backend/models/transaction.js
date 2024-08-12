@@ -5,14 +5,16 @@ const TransactionSchema = new mongoose.Schema(
     transactionId: {
       type: String,
     },
-    loyality_card: {
+    coupon_id: "ObjectId", // Reference to Coupons, nullable for earning and discount transactions
+    discount_id: "ObjectId", // Reference to Discounts, nullable for earning and reward transactions
+    point_criteria: "ObjectId", // Reference to poit_critera
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Loyality",
+      ref: "User",
       required: true,
     },
-    clientId: {
-      type: String,
-      required: true,
+    ClientId:{
+      type: Object
     },
     note:{
       type: Object
@@ -23,10 +25,12 @@ const TransactionSchema = new mongoose.Schema(
       enum: ["success", "failed", "pending"],
       required: true,
     },
-    amount: {
-      type: Number,
-      required: true,
+    points_redeemed: {
+      type: Number,   // Reference to Coupons,Discounts , nullable for earning    
     },
+    transaction_type:{
+      enum: ["discount", "coupon", "earn"],
+    }
   },
   {
     timestamps: true,
