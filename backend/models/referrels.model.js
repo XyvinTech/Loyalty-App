@@ -1,22 +1,46 @@
 const mongoose = require("mongoose");
 
-const ReferralSchema = new mongoose.Schema({
-
-   referral_id:{
-    type: mongoose.Schema.Types.ObjectId,
-      ref: "PointsCriteria",
+const ReferralSchema = new mongoose.Schema(
+  {
+    referrerId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-   },
-   referrer_id: "ObjectId", // Reference to the referring user
-   referred_id: "ObjectId", // Reference to the referred user
-   points_awarded: "Number",
-
-   action: "String", // e.g., 'signup', '1st purchase',
-   isActionCompleted:Boolean
-
-}, {
+    },
+    referredId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    referralCode: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    pointsAwarded: {
+      type: Number,
+      default: 0,
+    },
+    action: {
+      type: String,
+      // enum: ['signup', 'purchase', 'custom'],
+      required: true,
+    },
+    isActionCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    actionCompletedAt: {
+      type: Date,
+    },
+    notes: {
+      type: String,
+      maxlength: 500,
+    },
+  },
+  {
     timestamps: true,
-})
+  }
+);
 
-
-module.exports = mongoose.model("tier", TierSchema);
+module.exports = mongoose.model("Referral", ReferralSchema);

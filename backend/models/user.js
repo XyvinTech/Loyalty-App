@@ -1,30 +1,43 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-
+const UserSchema = new mongoose.Schema(
+  {
     email: {
-        type: String,
+      type: String,
+      required: true,
+      unique: true,
+      //   index: true,
     },
     phoneNumber: {
-        type: String,
+      type: String,
+      required: true,
+      unique: true,
     },
-    client_company: {
-        type: String,
+    clientCompany: {
+      type: String,
+      required: true,
     },
     points: {
-        type: Number,
-        
+      type: Number,
+      default: 0,
     },
     tier: {
-        type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Tier",
     },
-    referred_code:{},
-    referred_user_id:{}
-
-
-}, {
+    referralCode: {
+      type: String,
+      unique: true,
+      index: true,
+    },
+    referredUserId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
     timestamps: true,
-})
+  }
+);
 
-
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
