@@ -10,6 +10,10 @@ import Users from "../../pages/users";
 import Categories from "../../pages/categories";
 import Brands from "../../pages/brands";
 import ProtectedRoute from "../../utils/ProtectedRoute";
+import { Coupons } from "../../pages/coupons";
+import { Discounts } from "../../pages/discounts";
+import { PointsCriterias } from "../../pages/pointsCriterias";
+import { Tiers } from "../../pages/tiers";
 
 export const RoutesConfig = () => {
   return [
@@ -61,6 +65,22 @@ export const RoutesConfig = () => {
         {
           path: "brands",
           element: <Brands />,
+        },
+        {
+          path: "coupons",
+          element: <Coupons />,
+        },
+        {
+          path: "discounts",
+          element: <Discounts />,
+        },
+        {
+          path: "points-criterias",
+          element: <PointsCriterias />,
+        },
+        {
+          path: "tiers",
+          element: <Tiers />,
         },
         {
           path: "*",

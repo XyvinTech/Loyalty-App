@@ -36,3 +36,6 @@ export const BRAND_INSTANCE = createAxiosInstance(`${BASE_URL}api/brand`, { "Con
 export const TRANSACTION_INSTANCE = createAxiosInstance(`${BASE_URL}api/transaction`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 export const UPLOAD_INSTANCE = createAxiosInstance(`${BASE_URL}api/`, { "Content-Type": "multipart/form-data",  Authorization: `Bearer ${token}`, });
 
+
+export const USER_INSTANCE = createAxiosInstance(`${BASE_URL}api/user`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+

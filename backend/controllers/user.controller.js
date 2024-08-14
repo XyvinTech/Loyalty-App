@@ -1,14 +1,17 @@
 const User = require("../models/user");
 
+
+// Create user  
 exports.createUser = async (req, res) => {
+  console.log('createUser hitted')
   try {
-    const { email, phoneNumber, referralCode } = req.body;
+    const { email, phoneNumber, referralCode, clientCompany } = req.body;
 
     // Check if the user exists by either email or phone number and Client Company
     const userExist = await User.findOne({
-        $or: [{ email: email }, { phoneNumber: phoneNumber }],
-        clientCompany: clientCompany,
-      });
+      $or: [{ email: email }, { phoneNumber: phoneNumber }],
+      clientCompany: clientCompany,
+    });
 
     if (userExist) {
       return res.status(400).send({
@@ -67,5 +70,47 @@ exports.getUserDetails = async (req, res) => {
     res.send(user);
   } catch (error) {
     res.status(500).send({ status: false, error: error.message });
+  }
+};
+
+
+// Update User
+exports.updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(id, updatedData, {
+      new: true, // Returns the updated document
+      // runValidators: true, // Ensure the new data is validated
+    });
+
+    if (!updatedUser) {
+      return res.status(404).send({ status: false, error: "User not found" });
+    }
+
+    res.send({ status: true, data: updatedUser });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(400).send({ status: false, error: error.message });
+  }
+};
+
+
+// Delete User
+exports.deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      return res.status(404).send({ status: false, error: "User not found" });
+    }
+
+    res.send({ status: true, message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(400).send({ status: false, error: error.message });
   }
 };
