@@ -38,4 +38,5 @@ export const UPLOAD_INSTANCE = createAxiosInstance(`${BASE_URL}api/`, { "Content
 
 
 export const USER_INSTANCE = createAxiosInstance(`${BASE_URL}api/user`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+export const POINTS_CRITERIAS_INSTANCE = createAxiosInstance(`${BASE_URL}api/points-criteria`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 

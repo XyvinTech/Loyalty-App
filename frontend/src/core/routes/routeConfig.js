@@ -12,8 +12,8 @@ import Brands from "../../pages/brands";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import { Coupons } from "../../pages/coupons";
 import { Discounts } from "../../pages/discounts";
-import { PointsCriterias } from "../../pages/pointsCriterias";
 import { Tiers } from "../../pages/tiers";
+import PointsCriterias from "../../pages/pointsCriterias";
 
 export const RoutesConfig = () => {
   return [
