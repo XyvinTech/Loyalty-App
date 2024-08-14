@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const ReferralSchema = new mongoose.Schema(
   {
     referrerId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     referredId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     referralCode: {

@@ -6,6 +6,8 @@ const morgan = require('morgan')
 const PORT = process.env.PORT || 3005
 const routes = require('./routes/route')
 const path = require('path')
+const userRouter = require('./routes/user.route')
+const pointsCriteriaRouter = require('./routes/pointsCriteria.route')
 
 
 
@@ -21,6 +23,10 @@ app.use('/upload', express.static(path.join(__dirname, 'uploads')))
 
 
 app.use('/',routes)
+app.use('/api',userRouter)
+app.use('/api',pointsCriteriaRouter)
+
+
 
 
 app.get('*', (req, res) => {

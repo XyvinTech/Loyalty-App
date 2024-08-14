@@ -1,5 +1,6 @@
 const Transaction = require('../models/transaction')
 const moment = require('moment');
+const User = require('../models/user');
 
 
 // Get all cards for admin
@@ -22,4 +23,3 @@ exports.getTransactions = async (req, res) => {
         res.status(500).send(error);
     }
 };
-

@@ -4,13 +4,13 @@ const UserSchema = new mongoose.Schema(
   {
     email: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
       //   index: true,
     },
     phoneNumber: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
     },
     clientCompany: {
@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
       default: 0,
     },
     tier: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Tier",
     },
     referralCode: {
@@ -31,8 +31,12 @@ const UserSchema = new mongoose.Schema(
       index: true,
     },
     referredUserId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    referralPointsAwarded: {
+      type: Boolean,
+      default: false,
     },
   },
   {

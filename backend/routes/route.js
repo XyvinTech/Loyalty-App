@@ -54,22 +54,22 @@ router.route('/api/brand/:id')
 
 //loyalty card
 
-router.route('/api/loyalitycard')
-    .get(verifyToken, loyaltyController.getCards)
-    .post(verifyToken, loyaltyController.createCard)
+// router.route('/api/loyalitycard')
+//     .get(verifyToken, loyaltyController.getCards)
+//     .post(verifyToken, loyaltyController.createCard)
 
-router.get('/api/loyalitycard/admin', verifyToken, (loyaltyController.getAllCards))
+// router.get('/api/loyalitycard/admin', verifyToken, (loyaltyController.getAllCards))
 
-router.route('/api/loyalitycard/:id')
-    .put(verifyToken, loyaltyController.editCard)
-    .get(verifyToken, loyaltyController.getCardById)
-    .delete(verifyToken, loyaltyController.deleteCard)
+// router.route('/api/loyalitycard/:id')
+//     .put(verifyToken, loyaltyController.editCard)
+//     .get(verifyToken, loyaltyController.getCardById)
+//     .delete(verifyToken, loyaltyController.deleteCard)
 
 
 
 
 //redeem card
-router.post('/api/redeemcard/otpCheck', verifyToken, loyaltyController.otpCheck)
+// router.post('/api/redeemcard/otpCheck', verifyToken, loyaltyController.otpCheck)
 
 //transaction
 router.route('/api/transaction')
@@ -83,6 +83,6 @@ router.post(
     uploadController.uploadImage
 );
 
-router.get("/api/cards/brand", verifyToken, loyaltyController.getCardByBrand);
+// router.get("/api/cards/brand", verifyToken, loyaltyController.getCardByBrand);
 
 module.exports = router
