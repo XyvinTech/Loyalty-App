@@ -168,7 +168,6 @@ export default function AddPointsCriteria({
                   <StyledTextfield
                     placeholder="Enter Description"
                     multiline
-                    rows={4}
                     {...field}
                   />
                   {errors.description && (
@@ -191,14 +190,13 @@ export default function AddPointsCriteria({
                   <StyledTextfield
                     placeholder="Enter Conditions"
                     multiline
-                    rows={2}
                     {...field}
                   />
-                  {/* {errors.conditions && (
+                  {errors.conditions && (
                     <span style={errorMsgStyle}>
                       {errors.conditions.message}
                     </span>
-                  )} */}
+                  )}
                 </>
               )}
             //   rules={{ required: "Enter Conditions" }}
