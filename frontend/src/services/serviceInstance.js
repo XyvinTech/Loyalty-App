@@ -39,4 +39,7 @@ export const UPLOAD_INSTANCE = createAxiosInstance(`${BASE_URL}api/`, { "Content
 
 export const USER_INSTANCE = createAxiosInstance(`${BASE_URL}api/user`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 export const POINTS_CRITERIAS_INSTANCE = createAxiosInstance(`${BASE_URL}api/points-criteria`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+export const TIER_INSTANCE= createAxiosInstance(`${BASE_URL}api/tier`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+export const COUPON_INSTANCE= createAxiosInstance(`${BASE_URL}api/coupon`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+export const DISCOUNT_INSTANCE= createAxiosInstance(`${BASE_URL}api/discount`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 

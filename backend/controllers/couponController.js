@@ -30,7 +30,7 @@ exports.getCoupon = async (req, res) => {
                 description: cou.description,
                 brand: cou.brand,
                 image: cou.image,
-                otp: cou.OTP,
+                otp: cou.otp,
                 pointsRequired: cou.points_required,
                 coinCost: cou.coin_cost,
                 startsFrom: cou.starts_from,

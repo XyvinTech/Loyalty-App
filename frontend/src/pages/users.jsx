@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import StyledTable from "../ui/styledTable";
 import { tableHeaderReplace } from "../utils/tableHeaderReplace";
 import {
-  getUserById,
   getUsers,
   deleteUser,
 } from "../services/users";

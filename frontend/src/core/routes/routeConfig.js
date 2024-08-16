@@ -10,10 +10,10 @@ import Users from "../../pages/users";
 import Categories from "../../pages/categories";
 import Brands from "../../pages/brands";
 import ProtectedRoute from "../../utils/ProtectedRoute";
-import { Coupons } from "../../pages/coupons";
 import { Discounts } from "../../pages/discounts";
-import { Tiers } from "../../pages/tiers";
 import PointsCriterias from "../../pages/pointsCriterias";
+import Tiers from "../../pages/tiers";
+import Coupons from "../../pages/coupons.jsx"
 
 export const RoutesConfig = () => {
   return [

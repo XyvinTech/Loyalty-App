@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const CouponSchema = new mongoose.Schema({
-  id : {
-    type : String,
-    required :true,
-    trim : true
-  },
   title: {
     type: String,
     required: true,
@@ -18,15 +13,15 @@ const CouponSchema = new mongoose.Schema({
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref:'Brand',
-    required: true
+    // required: true
   },
   image: {
     type: String,
-    required: true
+    // required: true
   },
-  OTP: {
+  otp: {
     type: Number,
-    required: true
+    // required: true
   },
   points_required: {
     type: Number,
@@ -38,11 +33,11 @@ const CouponSchema = new mongoose.Schema({
   },
   starts_from:{
     type: String,
-    required: true
+    // required: true
   },
   expiry: {
     type: String,
-    required: true
+    // required: true
   },
   no_of_cards: {
     type: Number,
@@ -50,12 +45,12 @@ const CouponSchema = new mongoose.Schema({
   },
   availability_criteria:{
     type: String,
-    required: true,
+    // required: true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref:'Category',
-    required: true
+    // required: true
   },
   status: {
     type: String,
