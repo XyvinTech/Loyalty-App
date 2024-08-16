@@ -1,3 +1,4 @@
+
 const Category = require('../models/category')
 const moment = require('moment');
 
@@ -22,12 +23,12 @@ exports.createCategory = async (req, res) => {
 // Get category
 exports.getCategory = async (req, res) => {
     try {
-        const category = await Category.find();
-        let formatData = category.map(cat => (
+        const categories = await Category.find();
+        let formatData = categories.map(category => (
             {
-                _id: cat._id,
-                title: cat.title,
-                createdAt: moment.utc(cat.createdAt).format("D/M/YYYY"),
+                _id: category._id,
+                title: category.title,
+                createdAt: moment.utc(category.createdAt).format("D/M/YYYY"),
             }))
         res.status(200).send({status:true,result:formatData});
     } catch (error) {
