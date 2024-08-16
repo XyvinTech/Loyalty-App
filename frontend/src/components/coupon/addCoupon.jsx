@@ -14,6 +14,8 @@ import StyledSelectField from "../../ui/styledSelectField";
 import { addCoupon, updateCoupon } from "../../services/coupon";
 import { toast } from "react-toastify";
 import StyledDateField from "../../ui/StyledDateField";
+import { getCategory } from "../../services/category";
+import { getBrand } from "../../services/brands";
 
 export default function AddCoupon({
   open,
@@ -33,15 +35,24 @@ export default function AddCoupon({
   const [categoryOptions, setCategoryOptions] = useState([]);
 
   useEffect(() => {
-    // Mock data - replace with your actual data fetching
-    setBrandOptions([
-      { value: "brand1", label: "Brand 1" },
-      { value: "brand2", label: "Brand 2" },
-    ]);
-    setCategoryOptions([
-      { value: "category1", label: "Category 1" },
-      { value: "category2", label: "Category 2" },
-    ]);
+    getBrand().then((res) => {
+      if (res.status) {
+        setBrandOptions(
+          res.result.map((brand) => ({ label: brand.title, value: brand._id }))
+        );
+      }
+    });
+
+    getCategory().then((res) => {
+      if (res.status) {
+        setCategoryOptions(
+          res.result.map((category) => ({
+            label: category.title,
+            value: category._id,
+          }))
+        );
+      }
+    });
 
     reset({
       title: isUpdate ? couponsData.title : "",
@@ -98,6 +109,8 @@ export default function AddCoupon({
     reset({});
     onClose();
   };
+
+  console.log(categoryOptions);
 
   return (
     <Dialog open={open} maxWidth="sm" fullWidth>
@@ -172,7 +185,6 @@ export default function AddCoupon({
                   )}
                 </>
               )}
-            //   rules={{ required: "Select Brand" }}
             />
           </Stack>
 
@@ -216,14 +228,15 @@ export default function AddCoupon({
             />
           </Stack>
           <Stack>
-            <Typography variant="subtitle2">Starts date</Typography>
+            <Typography variant="subtitle2">Starts From</Typography>
             <Controller
               name="starts_from"
               control={control}
               render={({ field }) => (
                 <>
-                  <StyledDateField
-                    placeholder="Start Date"
+                  <StyledTextfield
+                    type="date"
+                    placeholder="Enter Starts From"
                     {...field}
                   />
                   {errors.starts_from && (
@@ -233,18 +246,20 @@ export default function AddCoupon({
                   )}
                 </>
               )}
-            //   rules={{ required: "Enter starts date" }}
+              rules={{ required: "Enter Starts From" }}
             />
           </Stack>
+
           <Stack>
-            <Typography variant="subtitle2">Expiry Date</Typography>
+            <Typography variant="subtitle2">expiry</Typography>
             <Controller
               name="expiry"
               control={control}
               render={({ field }) => (
                 <>
-                  <StyledDateField
-                    placeholder="Start Date"
+                  <StyledTextfield
+                    type="date"
+                    placeholder="Enter expiry"
                     {...field}
                   />
                   {errors.expiry && (
@@ -252,7 +267,7 @@ export default function AddCoupon({
                   )}
                 </>
               )}
-            //   rules={{ required: "Enter expiry date" }}
+              rules={{ required: "Enter expiry" }}
             />
           </Stack>
 
@@ -295,7 +310,7 @@ export default function AddCoupon({
                   )}
                 </>
               )}
-            //   rules={{ required: "Enter availability criteria" }}
+              //   rules={{ required: "Enter availability criteria" }}
             />
           </Stack>
           <Stack>
@@ -316,7 +331,6 @@ export default function AddCoupon({
                   )}
                 </>
               )}
-            //   rules={{ required: "Select Category" }}
             />
           </Stack>
         </Stack>

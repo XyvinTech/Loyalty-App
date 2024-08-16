@@ -92,14 +92,14 @@ router
 //discount
 router
   .route("/api/discount")
-  .get(verifyToken, discountController.getDiscount)
-  .post(verifyToken, discountController.createDiscount);
+  .get( discountController.getDiscount)
+  .post( discountController.createDiscount);
 
 router
   .route("/api/discount/:id")
-  .get(verifyToken,discountController.getDiscountById)
-  .put(verifyToken, discountController.editDiscount)
-  .delete(verifyToken, discountController.deleteDiscount);
+  .get(discountController.getDiscountById)
+  .put( discountController.editDiscount)
+  .delete( discountController.deleteDiscount);
 
 //loyalty card
 

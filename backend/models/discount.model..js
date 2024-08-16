@@ -30,14 +30,12 @@ const DiscountSchema = new mongoose.Schema({
 
   valid_from:{
     type: Date,
-    required: true
+    // required: true
   },
   valid_to: {
     type: Date,
-    required: true
+    // required: true
   },
-
-
   status: {
     type: String,
     default: "active",

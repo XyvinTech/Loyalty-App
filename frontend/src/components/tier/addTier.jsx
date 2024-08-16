@@ -46,13 +46,13 @@ export default function AddTire({
     addTier(data)
       .then((res) => {
         if (res.status) {
-          toast.success("Points criteria added successfully");
+          toast.success("Tier added successfully");
           isSubmitted();
           onClose();
         }
       })
       .catch((error) => {
-        toast.error(error.response?.message || "Failed to add points criteria");
+        toast.error(error.response?.message || "Failed to add Tier");
       });
   };
 
@@ -60,13 +60,13 @@ export default function AddTire({
     updateTier(tiersData._id, data)
       .then((res) => {
         if (res.status) {
-          toast.success("Points criteria updated successfully");
+          toast.success("Tier updated successfully");
           isSubmitted();
           onClose();
         }
       })
       .catch((error) => {
-        toast.error(error.response?.message || "Failed to update points criteria");
+        toast.error(error.response?.message || "Failed to update Tier");
       });
   };
 
@@ -87,7 +87,7 @@ export default function AddTire({
           variant="subtitle1"
           sx={{ color: "primary.dark", fontWeight: 600 }}
         >
-          {isUpdate ? "Edit" : "Add"} Points Criteria
+          {isUpdate ? "Edit" : "Add"} Tier
         </Typography>
         <IconButton onClick={dialogClose}>
           <Close />
