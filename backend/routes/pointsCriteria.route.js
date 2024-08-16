@@ -13,7 +13,7 @@ pointsCriteriaRouter.post(
 
 pointsCriteriaRouter.route('/points-criteria/:id')
     .get(pointsCriteriaController.getPointsCriteriaById)
-    .put(pointsCriteriaController.editCategory)
-    .delete(pointsCriteriaController.deleteCategory)
+    .put(pointsCriteriaController.updatePointsCriteria)
+    .delete(pointsCriteriaController.deletePointsCriteria)
 
 module.exports = pointsCriteriaRouter;

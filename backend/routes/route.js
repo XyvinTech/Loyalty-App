@@ -2,7 +2,10 @@ const multer = require("multer");
 const adminController = require('../controllers/adminsController')
 const loyaltyController = require('../controllers/loyalitycardController')
 const categoryController = require('../controllers/categoryController')
+const couponController = require('../controllers/couponController')
+const discountController = require('../controllers/discountController')
 const brandController = require('../controllers/brandController')
+const tierController = require('../controllers/tierController')
 const transactionController = require('../controllers/transactionController');
 const uploadController = require("../controllers/uploadController")
 const verifyToken = require("../middleware/verifyUser");
@@ -33,23 +36,50 @@ router.delete('/api/admins/:id', verifyToken, (adminController.deleteAdminDetail
 
 //category
 router.route('/api/category')
-    .get(verifyToken, categoryController.getCategory)
-    .post(verifyToken, categoryController.createCategory)
+    .get(categoryController.getCategory)
+    .post(categoryController.createCategory)
 
 router.route('/api/category/:id')
-    .put(verifyToken, categoryController.editCategory)
-    .delete(verifyToken, categoryController.deleteCategory)
+    .put(categoryController.editCategory)
+    .delete( categoryController.deleteCategory)
+
+    //coupon
+router.route('/api/coupon')
+.get(couponController.getCoupon)
+.post(couponController.createCoupon)
+
+router.route('/api/coupon/:id')
+.put(verifyToken, couponController.editCoupon)
+.delete(verifyToken, couponController.deleteCoupon)
 
 
 //brand
 router.route('/api/brand')
-    .get(verifyToken, brandController.getBrand)
-    .post(verifyToken, brandController.createBrand)
+    .get( brandController.getBrand)
+    .post( brandController.createBrand)
 
 router.route('/api/brand/:id')
-    .put(verifyToken, brandController.editBrand)
-    .delete(verifyToken, brandController.deleteBrand)
+    .put(brandController.editBrand)
+    .delete( brandController.deleteBrand)
 
+//tier
+router.route('/api/tier')
+.get(tierController.getTier)
+.post(tierController.createTier)
+
+router.route('/api/tier/:id')
+.put( tierController.editTier)
+.delete( tierController.deleteTier)
+
+
+//discount
+router.route('/api/discount')    
+    .get(verifyToken, discountController.getDiscount)
+    .post(verifyToken, discountController.createDiscount)
+
+router.route('/api/discount/:id')
+    .put(verifyToken, discountController.editDiscount)
+    .delete(verifyToken, brandController.deleteDiscount)
 
 
 //loyalty card

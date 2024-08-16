@@ -1,12 +1,18 @@
 const mongoose = require("mongoose");
 
 const TierSchema = new mongoose.Schema({
-
+   id: {
+    type : String,
+    required :true,
+    trim : true
+   },
    tier_name:{
-    type:String
+    type:String,
+    required:true,
    },
    point_level:{
-    type:Number
+    type:Number,
+    required:true
    }
 
 }, {
