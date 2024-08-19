@@ -1,11 +1,6 @@
 const multer = require("multer");
 const adminController = require("../controllers/adminsController");
 const loyaltyController = require("../controllers/loyalitycardController");
-const categoryController = require("../controllers/categoryController");
-const couponController = require("../controllers/couponController");
-const discountController = require("../controllers/discountController");
-const brandController = require("../controllers/brandController");
-const tierController = require("../controllers/tierController");
 const transactionController = require("../controllers/transactionController");
 const uploadController = require("../controllers/uploadController");
 const verifyToken = require("../middleware/verifyUser");
@@ -44,62 +39,7 @@ router.delete(
   adminController.deleteAdminDetails
 );
 
-//category
-router
-  .route("/api/category")
-  .get(categoryController.getCategory)
-  .post(categoryController.createCategory);
 
-router
-  .route("/api/category/:id")
-  .put(categoryController.editCategory)
-  .delete(categoryController.deleteCategory);
-
-//coupon
-router
-  .route("/api/coupon")
-  .get(couponController.getCoupon)
-  .post(couponController.createCoupon);
-
-router
-  .route("/api/coupon/:id")
-  .put(verifyToken, couponController.editCoupon)
-  .delete(verifyToken, couponController.deleteCoupon);
-
-//brand
-router
-  .route("/api/brand")
-  .get(brandController.getBrand)
-  .post(brandController.createBrand);
-
-router
-  .route("/api/brand/:id")
-  .put(brandController.editBrand)
-  .delete(brandController.deleteBrand);
-
-//tier
-router
-  .route("/api/tier")
-  .get(tierController.getTier)
-  .post(tierController.createTier);
-
-router
-  .route("/api/tier/:id")
-  .get(tierController.getTierById)
-  .put(tierController.editTier)
-  .delete(tierController.deleteTier);
-
-//discount
-router
-  .route("/api/discount")
-  .get( discountController.getDiscount)
-  .post( discountController.createDiscount);
-
-router
-  .route("/api/discount/:id")
-  .get(discountController.getDiscountById)
-  .put( discountController.editDiscount)
-  .delete( discountController.deleteDiscount);
 
 //loyalty card
 

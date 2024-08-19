@@ -8,6 +8,11 @@ const routes = require('./routes/route')
 const path = require('path')
 const userRouter = require('./routes/user.route')
 const pointsCriteriaRouter = require('./routes/pointsCriteria.route')
+const brandRouter = require('./routes/brand.route')
+const couponRouter = require('./routes/coupon.route')
+const discountRouter = require('./routes/discount.route')
+const categoryRouter = require('./routes/category.route')
+const tierRouter = require('./routes/tier.route')
 
 
 
@@ -25,7 +30,11 @@ app.use('/upload', express.static(path.join(__dirname, 'uploads')))
 app.use('/',routes)
 app.use('/api',userRouter)
 app.use('/api',pointsCriteriaRouter)
-
+app.use('/api',brandRouter)
+app.use('/api',couponRouter)
+app.use('/api',discountRouter)
+app.use('/api',categoryRouter)
+app.use('/api',tierRouter)
 
 
 

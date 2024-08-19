@@ -2,9 +2,7 @@
 const Category = require('../models/category')
 const moment = require('moment');
 
-// jobsController.js
-
-// Create a new job
+// Create a new category
 exports.createCategory = async (req, res) => {
     try {
         const getCat = await Category.findOne({title:req.body.title})
@@ -36,7 +34,7 @@ exports.getCategory = async (req, res) => {
     }
 };
 
-// edit title of category
+// edit category
 exports.editCategory = async (req, res) => {
     try {
         await Category.findByIdAndUpdate({ _id: req.params.id },{title:req.body.title})
@@ -46,6 +44,7 @@ exports.editCategory = async (req, res) => {
     }
 };
 
+//delete category
 exports.deleteCategory = async (req, res) => {
     try {
         await Category.findByIdAndDelete({ _id: req.params.id })

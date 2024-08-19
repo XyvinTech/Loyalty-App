@@ -47,7 +47,7 @@ exports.getCoupon = async (req, res) => {
     }
 };
 
-// edit title of coupon
+// edit coupon
 exports.editCoupon = async (req, res) => {
     try {
         await Coupon.findByIdAndUpdate(req.params.id,req.body,{ new: true, runValidators: true })
@@ -57,6 +57,7 @@ exports.editCoupon = async (req, res) => {
     }
 };
 
+//delete coupon
 exports.deleteCoupon = async (req, res) => {
     try {
         await Coupon.findByIdAndDelete({ _id: req.params.id })

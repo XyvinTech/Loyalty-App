@@ -1,10 +1,7 @@
 const Brand = require('../models/brand')
-const moment = require('moment');
 
-// jobsController.js
-
-// Create a new job
-exports.createBrand = async (req, res) => {
+// Create a new brand
+exports.createBrand= async (req, res) => {
     try {
         const getbrand = await Brand.findOne({title:req.body.title})
         if (getbrand) {
@@ -19,7 +16,7 @@ exports.createBrand = async (req, res) => {
     }
 };
 
-// Get category
+// Get brand
 exports.getBrand = async (req, res) => {
     try {
         const brands = await Brand.find()
@@ -36,7 +33,20 @@ exports.getBrand = async (req, res) => {
     }
 };
 
-// edit title of category
+//get brand by id
+exports.getBrandById = async (req, res) => {
+    try {
+      const brand = await Brand.findById(req.params.id);
+      if (!brand) {
+        return res.status(404).send({ status: false, error: "Brand not found" });
+      }
+      res.status(200).send({ status: true, data: brand });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  };
+
+// edit category
 exports.editBrand = async (req, res) => {
     try {
         await Brand.findByIdAndUpdate({ _id: req.params.id },req.body)
@@ -46,6 +56,7 @@ exports.editBrand = async (req, res) => {
     }
 };
 
+//delete brand
 exports.deleteBrand = async (req, res) => {
     try {
         await Brand.findByIdAndDelete({ _id: req.params.id })
