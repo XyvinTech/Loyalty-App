@@ -6,15 +6,17 @@ import { getDiscounts, deleteDiscount } from "../services/discount";
 import { toast } from "react-toastify";
 import AddDiscount from "../components/discount/addDiscount";
 
-const HEADER = ["Title",
-              "Discount Code",
-              "Description",
-              "Percentage",
-              // "Image",
-              "Tier Required",
-              "Valid From",
-              "Valid To",
-              "Status",];
+const HEADER = [
+  "Title",
+  "Discount Code",
+  "Description",
+  "Percentage",
+  // "Image",
+  "Tier Required",
+  "Valid From",
+  "Valid To",
+  "Status",
+];
 
 export function Discounts() {
   const [open, setOpen] = useState(false);

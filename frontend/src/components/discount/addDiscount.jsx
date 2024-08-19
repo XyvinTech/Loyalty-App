@@ -42,7 +42,7 @@ export default function AddDiscount({
 
     reset({
       title: isUpdate ? discountsData.title : "",
-      DiscountCode: isUpdate ? discountsData.DiscountCode : "",
+      discountCode: isUpdate ? discountsData.DiscountCode : "",
       description: isUpdate ? discountsData.description : "",
       percentage: isUpdate ? discountsData.percentage : "",
       tierRequired: isUpdate ? discountsData.tierRequired : "",

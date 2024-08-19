@@ -10,7 +10,10 @@ import {
 import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import StyledTextfield from "../../ui/styledTextfield";
-import { addPointsCriteria, updatePointsCriteria } from "../../services/pointsCriterias";
+import {
+  addPointsCriteria,
+  updatePointsCriteria,
+} from "../../services/pointsCriterias";
 import { toast } from "react-toastify";
 
 export default function AddPointsCriteria({
@@ -33,7 +36,7 @@ export default function AddPointsCriteria({
       points: isUpdate ? pointsCriteriaData["points"] : 0,
       icon: isUpdate ? pointsCriteriaData["icon"] : "",
       description: isUpdate ? pointsCriteriaData["description"] : "",
-      conditions: isUpdate ? pointsCriteriaData["conditions"] : "",
+      limit: isUpdate ? pointsCriteriaData["limit"] : "",
     });
   }, [open, isUpdate, pointsCriteriaData, reset]);
 
@@ -69,7 +72,9 @@ export default function AddPointsCriteria({
         }
       })
       .catch((error) => {
-        toast.error(error.response?.message || "Failed to update points criteria");
+        toast.error(
+          error.response?.message || "Failed to update points criteria"
+        );
       });
   };
 
@@ -128,9 +133,7 @@ export default function AddPointsCriteria({
                     {...field}
                   />
                   {errors.points && (
-                    <span style={errorMsgStyle}>
-                      {errors.points.message}
-                    </span>
+                    <span style={errorMsgStyle}>{errors.points.message}</span>
                   )}
                 </>
               )}
@@ -144,10 +147,7 @@ export default function AddPointsCriteria({
               control={control}
               render={({ field }) => (
                 <>
-                  <StyledTextfield
-                    placeholder="Enter Icon URL"
-                    {...field}
-                  />
+                  <StyledTextfield placeholder="Enter Icon URL" {...field} />
                   {/* {errors.icon && (
                     <span style={errorMsgStyle}>
                       {errors.icon.message}
@@ -155,7 +155,7 @@ export default function AddPointsCriteria({
                   )} */}
                 </>
               )}
-            //   rules={{ required: "Enter Icon URL" }}
+              //   rules={{ required: "Enter Icon URL" }}
             />
           </Stack>
           <Stack>
@@ -181,25 +181,23 @@ export default function AddPointsCriteria({
             />
           </Stack>
           <Stack>
-            <Typography variant="subtitle2">Conditions</Typography>
+            <Typography variant="subtitle2">limit</Typography>
             <Controller
-              name="conditions"
+              name="limit"
               control={control}
               render={({ field }) => (
                 <>
                   <StyledTextfield
-                    placeholder="Enter Conditions"
+                    placeholder="Enter limit"
                     multiline
                     {...field}
                   />
-                  {errors.conditions && (
-                    <span style={errorMsgStyle}>
-                      {errors.conditions.message}
-                    </span>
+                  {errors.limit && (
+                    <span style={errorMsgStyle}>{errors.limit.message}</span>
                   )}
                 </>
               )}
-            //   rules={{ required: "Enter Conditions" }}
+              //   rules={{ required: "Enter limit" }}
             />
           </Stack>
         </Stack>

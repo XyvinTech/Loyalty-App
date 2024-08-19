@@ -1,4 +1,5 @@
 const Brand = require('../models/brand')
+const moment = require ('moment')
 
 // Create a new brand
 exports.createBrand= async (req, res) => {
@@ -29,6 +30,7 @@ exports.getBrand = async (req, res) => {
             }))
         res.status(200).send({status:true,result:formatData});
     } catch (error) {
+        console.log(error)
         res.status(500).send(error);
     }
 };

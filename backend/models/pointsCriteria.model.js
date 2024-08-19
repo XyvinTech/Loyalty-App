@@ -20,8 +20,8 @@ const PointsCriteriaSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    conditions: {
-      limit: Number,
+    limit: {
+      type: Number,
     },
   },
   {
