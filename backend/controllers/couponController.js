@@ -11,10 +11,16 @@ exports.createCoupon = async (req, res) => {
             res.status(500).send({status:false,message:'already have a coupon'});
             return
         }
-        const coupon = new Coupon(req.body);
+        let value = req.body
+        value.category = value.category.value
+        value.brand = value.brand.value
+        value.availability_criteria = value.availability_criteria.label
+
+        const coupon = new Coupon(value);
         await coupon.save();
         res.status(201).send({status:true,coupon});
     } catch (error) {
+        console.log(error);
         res.status(500).send(error);
     }
 };
@@ -22,13 +28,22 @@ exports.createCoupon = async (req, res) => {
 // Get coupon
 exports.getCoupon = async (req, res) => {
     try {
-        const coupons = await Coupon.find();
+        const coupons = await Coupon.find()
+        .populate({
+          path: 'category',
+          select: 'title' // Select only the title from category
+        })
+        .populate({
+          path: 'brand',
+          select: 'title' // Select only the name from brand (or any relevant field)
+        })
+        .exec();
         let formatData = coupons.map(cou => (
             {
                 _id: cou._id,
                 title: cou.title,
                 description: cou.description,
-                brand: cou.brand,
+                brand: cou.brand.title,
                 image: cou.image,
                 otp: cou.otp,
                 pointsRequired: cou.points_required,
@@ -37,7 +52,7 @@ exports.getCoupon = async (req, res) => {
                 expiry: cou.expiry,
                 noOfCards: cou.no_of_cards,
                 availabilityCriteria: cou.availability_criteria,
-                category : cou.category,
+                category : cou.category.title,
                 status: cou.status,
                 createdAt: moment.utc(cou.createdAt).format("D/M/YYYY"),
             }))

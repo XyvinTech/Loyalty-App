@@ -9,10 +9,15 @@ exports.createBrand= async (req, res) => {
             res.status(500).send({status:false,message:'same Brand Name already added'});
             return
         }
+       if(!req.body.logo){
+        req.body.logo = "https://image-upload-oxium.s3.ap-south-1.amazonaws.com/loyalty_card/McDonald%27s_logo.svg.png"
+
+       }
         const brand = new Brand(req.body);
         await brand.save();
         res.status(201).send({status:true,brand});
     } catch (error) {
+        console.error(error)
         res.status(500).send(error);
     }
 };

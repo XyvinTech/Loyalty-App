@@ -3,7 +3,6 @@ const moment = require("moment");
 
 // create discount
 exports.createDiscount = async (req, res) => {
-  console.log("body : ", req.body);
   try {
     const getdiscount = await Discount.findOne({ title: req.body.title });
     if (getdiscount) {
@@ -30,11 +29,19 @@ exports.createDiscount = async (req, res) => {
 // Get discount
 exports.getDiscount = async (req, res) => {
   try {
-    const discounts = await Discount.find();
+    const discounts = await Discount.find()
+    .populate({
+      path: 'tier_required',
+      select: 'tier_name' 
+    })
+    .exec();
+
+    console.log(discounts);
+
 
     let formatData = discounts.map(
       (discount) => (
-        // console.log(discount.tier_required),
+        console.log(discount.tier_required[0]?.tier_name),
         {
           _id: discount._id,
           title: discount.title,
@@ -42,7 +49,7 @@ exports.getDiscount = async (req, res) => {
           description: discount.description,
           percentage: discount.percentage,
           image: discount.image,
-          tierRequired: discount.tier_required,
+          tierRequired:discount.tier_required[0]?.tier_name,
           validFrom: discount.valid_from,
           validTo: discount.valid_to,
           status: discount.status,
@@ -50,8 +57,10 @@ exports.getDiscount = async (req, res) => {
         }
       )
     );
+    
     res.status(200).send({ status: true, result: formatData });
   } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 };

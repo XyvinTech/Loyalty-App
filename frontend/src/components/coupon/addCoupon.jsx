@@ -32,6 +32,17 @@ export default function AddCoupon({
 
   const [brandOptions, setBrandOptions] = useState([]);
   const [categoryOptions, setCategoryOptions] = useState([]);
+  const AvailabilityArray = [{
+    code:10,
+    label:"Once in a month",
+  },
+  {
+    code:11,
+    label:"Twice in a month",
+  },{
+    code:12,
+    label:"Thrice in a month",
+  }]
 
   useEffect(() => {
     getBrand().then((res) => {
@@ -59,7 +70,6 @@ export default function AddCoupon({
       brand: isUpdate ? couponsData.brand : "",
       otp: isUpdate ? couponsData.otp : "",
       points_required: isUpdate ? couponsData.points_required : 0,
-      coin_cost: isUpdate ? couponsData.coin_cost : 0,
       starts_from: isUpdate ? couponsData.starts_from : "",
       expiry: isUpdate ? couponsData.expiry : "",
       no_of_cards: isUpdate ? couponsData.no_of_cards : 0,
@@ -208,24 +218,7 @@ export default function AddCoupon({
               rules={{ required: "Enter points required" }}
             />
           </Stack>
-          <Stack>
-            <Typography variant="subtitle2">Coin cost</Typography>
-            <Controller
-              name="coin_cost"
-              control={control}
-              render={({ field }) => (
-                <>
-                  <StyledTextfield placeholder="Enter coin cost" {...field} />
-                  {errors.coin_cost && (
-                    <span style={errorMsgStyle}>
-                      {errors.coin_cost.message}
-                    </span>
-                  )}
-                </>
-              )}
-              rules={{ required: "Enter coin cost" }}
-            />
-          </Stack>
+         
           <Stack>
             <Typography variant="subtitle2">Starts From</Typography>
             <Controller
@@ -298,20 +291,22 @@ export default function AddCoupon({
               control={control}
               render={({ field }) => (
                 <>
-                  <StyledTextfield
-                    placeholder="Enter availability criteria"
-                    {...field}
+                  <StyledSelectField
+                    options={AvailabilityArray}
+                    value={field.value}
+                    placeholder=" Availability Criteria"
+                    onChange={field.onChange}
                   />
-                  {errors.availability_criteria && (
-                    <span style={errorMsgStyle}>
-                      {errors.availability_criteria.message}
-                    </span>
+                  {errors.brand && (
+                    <span style={errorMsgStyle}>{errors.availability_criteria.message}</span>
                   )}
                 </>
               )}
               //   rules={{ required: "Enter availability criteria" }}
             />
           </Stack>
+
+          
           <Stack>
             <Typography variant="subtitle2">Category</Typography>
             <Controller

@@ -25,17 +25,17 @@ const DiscountSchema = new mongoose.Schema(
     tier_required: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "tier",
+        ref: "Tier",
         required: true,
       },
     ],
 
     valid_from: {
-      type: Date,
+      type: String,
       // required: true
     },
     valid_to: {
-      type: Date,
+      type: String,
       // required: true
     },
     status: {

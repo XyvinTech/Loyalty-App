@@ -31,9 +31,19 @@ export default function Users() {
   const init = () => {
     getUsers().then((res) => {
       if (res.status) {
+
+        const transformedData = res.result.map(user => ({
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          clientCompany: user.clientCompany,
+          points: user.points,
+          tier: user.tier?.tier_name || "Basic", // Safely access tier_name
+          referralCode: user.referralCode,
+        }));
+
         setUserData(
           tableHeaderReplace(
-            res.result,
+            transformedData,
             [
               "email",
               "phoneNumber",

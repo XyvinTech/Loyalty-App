@@ -16,4 +16,4 @@ const TierSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("tier", TierSchema);
+module.exports = mongoose.model("Tier", TierSchema);

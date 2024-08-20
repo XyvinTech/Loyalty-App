@@ -27,10 +27,6 @@ const CouponSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  coin_cost:{
-    type: Number,
-    required: true
-  },
   starts_from:{
     type: String,
     // required: true

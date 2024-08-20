@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Tier = require('../models/tier');
 
 
 // Create user  
@@ -23,27 +24,32 @@ exports.createUser = async (req, res) => {
 
     // Handle referral code if provided
     let referredUserId = null;
+
     if (referralCode) {
       const referringUser = await User.findOne({ referralCode: referralCode });
+
       if (referringUser) {
         referredUserId = referringUser._id;
       } else {
-        return res.status(400).send({
-          status: false,
-          error: "Invalid referral code",
-        });
+        referredUserId = null;
+        console.log("no referral found")
       }
     }
 
     // Create a new user with 500 points as a starting bonus
+    const basicPlan = await Tier.findOne({ tier_name: "Basic" })
     const newUser = new User({
       ...req.body,
       points: 500, // Assign 500 points to new user
       referredUserId: referredUserId,
+      tier: basicPlan._id
     });
     await newUser.save();
+    newUser.referralCode = newUser._id;
 
-    res.status(201).send({ status: true, data: newUser });
+    const updatedUser = await newUser.save();
+
+    res.status(201).send({ status: true, data: updatedUser });
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(400).send({ status: false, error: error.message });
@@ -53,9 +59,17 @@ exports.createUser = async (req, res) => {
 // Get all Users
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({}).select("-password_hash");
+    let users = await User.find({})
+    .select("-password_hash") // Exclude the password_hash field
+    .populate({
+      path: 'tier',
+      select: 'tier_name' // Select only the tier_name
+    })
+    .exec();
+    
     res.send({ status: true, result: users });
   } catch (error) {
+    console.log(error);
     res.status(500).send({ status: false, error: error.message });
   }
 };
