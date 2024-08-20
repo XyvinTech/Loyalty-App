@@ -14,11 +14,11 @@ export const adminNavActions = [
     //     href:'dashboard/market-place',
     //     icon: <SyncAlt/>
     // },
-    // {
-    //     title:'Transactions',
-    //     href:'dashboard/transaction',
-    //     icon: <SyncAlt/>
-    // },
+    {
+        title:'Transactions',
+        href:'dashboard/transaction',
+        icon: <SyncAlt/>
+    },
     // {
     //     title:'Loyal Cards',
     //     href:'dashboard/loyalcard',
