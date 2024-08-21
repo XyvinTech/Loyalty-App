@@ -12,7 +12,7 @@ discountRouter
   .put(discountController.editDiscount)
   .delete(discountController.deleteDiscount);
 discountRouter
-  .route("/redeemDiscount")
+  .route("/discounts/apply")
   .post(discountController.redeemDiscount)
 
 module.exports = discountRouter

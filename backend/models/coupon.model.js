@@ -35,10 +35,13 @@ const CouponSchema = new mongoose.Schema({
     type: String,
     // required: true
   },
-  // no_of_cards: {
-  //   type: Number,
-  //   required: true,
-  // },
+  tier_required: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Tier",
+      required: true,
+    },
+  ],
   availability_criteria:{
     type: String,
     // required: true,

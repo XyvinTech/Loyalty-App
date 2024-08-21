@@ -15,5 +15,9 @@ couponRouter
   couponRouter
   .route("/redeemCoupon")
   .post(couponController.redeemCoupon);
+  couponRouter
+  .route("/coupons/release")
+  .post(couponController.releaseCoupon);
+
 
   module.exports = couponRouter

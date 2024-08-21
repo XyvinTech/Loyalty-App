@@ -19,7 +19,6 @@ exports.createDiscount = async (req, res) => {
       valid_from: req.body.validFrom,
       valid_to: req.body.validTo
     };
-    console.log('ygfyugyugyg', payload);
     const discount = new Discount(payload);
     await discount.save();
     res.status(201).send({ status: true, discount });
