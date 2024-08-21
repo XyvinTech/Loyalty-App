@@ -68,11 +68,11 @@ export default function AddCoupon({
       title: isUpdate ? couponsData.title : "",
       description: isUpdate ? couponsData.description : "",
       brand: isUpdate ? couponsData.brand : "",
-      otp: isUpdate ? couponsData.otp : "",
+      pin: isUpdate ? couponsData.pin : "",
       points_required: isUpdate ? couponsData.points_required : 0,
       starts_from: isUpdate ? couponsData.starts_from : "",
       expiry: isUpdate ? couponsData.expiry : "",
-      no_of_cards: isUpdate ? couponsData.no_of_cards : 0,
+      // no_of_cards: isUpdate ? couponsData.no_of_cards : 0,
       availability_criteria: isUpdate ? couponsData.availability_criteria : "",
       category: isUpdate ? couponsData.category : "",
     });
@@ -119,7 +119,6 @@ export default function AddCoupon({
     onClose();
   };
 
-  console.log(categoryOptions);
 
   return (
     <Dialog open={open} maxWidth="sm" fullWidth>
@@ -264,24 +263,24 @@ export default function AddCoupon({
           </Stack>
 
           <Stack>
-            <Typography variant="subtitle2">No of Cards</Typography>
+            <Typography variant="subtitle2">PIN</Typography>
             <Controller
-              name="no_of_cards"
+              name="pin"
               control={control}
               render={({ field }) => (
                 <>
                   <StyledTextfield
-                    placeholder="Enter No. of cards"
+                    placeholder="Enter PIN"
                     {...field}
                   />
-                  {errors.no_of_cards && (
+                  {errors.pin && (
                     <span style={errorMsgStyle}>
-                      {errors.no_of_cards.message}
+                      {errors.pin.message}
                     </span>
                   )}
                 </>
               )}
-              rules={{ required: "Enter No. of cards" }}
+              rules={{ required: "Enter PIN" }}
             />
           </Stack>
           <Stack>

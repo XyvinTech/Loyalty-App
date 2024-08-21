@@ -61,7 +61,7 @@ export default function StyledTable({ header = [], data = [], isAction = false, 
                                         </TableCell>)
                                     } else if (head.toLowerCase() === "status") {
                                         return (<TableCell width={'10%'} key={ind} align='center' ><TabelStatus title={row[`${head}`]} /></TableCell>)
-                                    } else if (head.toLowerCase() === "logo") {
+                                    } else if (head.toLowerCase() === "logo" || head.toLowerCase() === "image") {
                                         return (<TableCell width={'10%'} key={ind} align='center' ><StyledLogo avatarSize={40} key={ind} avatarUrl={row[`${head}`]} bgColor={"#fff"} /></TableCell>)
                                     }
                                     return (<TableCell key={ind} >{row[`${head}`]}</TableCell>)

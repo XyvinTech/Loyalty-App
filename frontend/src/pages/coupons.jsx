@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 import AddCoupon from "../components/coupon/addCoupon";
 
-const HEADER = ["Image","Title","Description",'Brand',"OTP",'Points Required','Starts From','Expiry','No Of Cards','Availability Criteria','Category','Status'];
+const HEADER = ["Image","Title","Description",'Brand',"PIN",'Points Required','Starts From','Expiry','Availability Criteria','Category','Status'];
 
 export default function Coupons() {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,6 @@ export default function Coupons() {
   const [editStatus, setEditStatus] = useState(false);
   const [selectedData, setSelectedData] = useState();
 
-  console.log(couponsData)
 
   useEffect(() => {
     init();
@@ -29,7 +28,7 @@ export default function Coupons() {
         setCouponsData(
           tableHeaderReplace(
             res.result,
-            ["image","title","description",'brand',"otp",'pointsRequired','startsFrom','expiry','noOfCards','availabilityCriteria','category','status'],
+            ["image","title","description",'brand',"pin",'pointsRequired','startsFrom','expiry','availabilityCriteria','category','status'],
             HEADER
           )
         );

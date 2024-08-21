@@ -38,19 +38,20 @@ exports.getCoupon = async (req, res) => {
           select: 'title' // Select only the name from brand (or any relevant field)
         })
         .exec();
+        console.log(coupons)
         let formatData = coupons.map(cou => (
             {
                 _id: cou._id,
                 title: cou.title,
                 description: cou.description,
-                brand: cou.brand.title,
-                image: cou.image,
-                otp: cou.otp,
+                brand: cou.brand?.title,
+                image: cou.image?cou.image:'https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg',
+                pin: cou.pin,
                 pointsRequired: cou.points_required,
                 coinCost: cou.coin_cost,
                 startsFrom: cou.starts_from,
                 expiry: cou.expiry,
-                noOfCards: cou.no_of_cards,
+                // noOfCards: cou.no_of_cards,
                 availabilityCriteria: cou.availability_criteria,
                 category : cou.category.title,
                 status: cou.status,
@@ -58,6 +59,7 @@ exports.getCoupon = async (req, res) => {
             }))
         res.status(200).send({status:true,result:formatData});
     } catch (error) {
+        console.log(error)
         res.status(500).send(error);
     }
 };

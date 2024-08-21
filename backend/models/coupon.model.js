@@ -19,7 +19,7 @@ const CouponSchema = new mongoose.Schema({
     type: String,
     // required: true
   },
-  otp: {
+  pin: {
     type: Number,
     // required: true
   },
@@ -35,10 +35,10 @@ const CouponSchema = new mongoose.Schema({
     type: String,
     // required: true
   },
-  no_of_cards: {
-    type: Number,
-    required: true,
-  },
+  // no_of_cards: {
+  //   type: Number,
+  //   required: true,
+  // },
   availability_criteria:{
     type: String,
     // required: true,

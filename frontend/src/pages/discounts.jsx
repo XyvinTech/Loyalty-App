@@ -38,7 +38,7 @@ export function Discounts() {
             res.result,
             [
               "title",
-              "DiscountCode",
+              "discountCode",
               "description",
               "percentage",
               // "image",

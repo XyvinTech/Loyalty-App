@@ -16,7 +16,10 @@ exports.createDiscount = async (req, res) => {
       tier_required: req.body.tierRequired.value,
       status: "active",
       discount_code: req.body.DiscountCode,
+      valid_from:req.body.validFrom,
+      valid_to:req.body.validTo
     };
+    console.log('ygfyugyugyg',payload);
     const discount = new Discount(payload);
     await discount.save();
     res.status(201).send({ status: true, discount });
