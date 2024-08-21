@@ -12,4 +12,8 @@ couponRouter
   .put(couponController.editCoupon)
   .delete(couponController.deleteCoupon);
 
+  couponRouter
+  .route("/redeemCoupon")
+  .post(couponController.redeemCoupon);
+
   module.exports = couponRouter

@@ -1,7 +1,8 @@
 
 const Coupon = require('../models/coupon.model')
 const moment = require('moment')
-
+const { v4: uuidv4 } = require("uuid");
+const User = require('../models/user');
 //create coupon
 
 exports.createCoupon = async (req, res) => {
@@ -82,4 +83,30 @@ exports.deleteCoupon = async (req, res) => {
     } catch (error) {
         res.status(500).send(error);
     }
+};
+
+
+
+exports.redeemCoupon = async (req, res) => {
+  try {
+    const { couponId, pin, userId, note } = req.body;
+    const checkPin = await Coupon.findOne({ _id: couponId, pin: pin }).select(" points_required");
+    const transactionData = {
+      transactionId: uuidv4(),
+      coupon: couponId,
+      userId,
+      note: note ? note : {},
+      status: checkPin ? "success" : "failed",
+      amount: checkPin ? checkPin.coin_worth : 0,
+    };
+    // await Transaction.create(transactionData);
+    if (checkPin) {
+      await User.updateOne({ _id: userId }, {  $inc: {  points: -checkPin.points_required },});
+      res.status(200).send({ status: true, message: "OTP verified successfully", data: checkPin });
+    } else {
+      res.status(400).send({ status: false, message: "OTP verification failed" });
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };
