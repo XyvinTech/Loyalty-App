@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const Tier = require('../models/tier');
-
+const cron = require('node-cron');
 
 // Create user  
 exports.createUser = async (req, res) => {
@@ -128,3 +128,38 @@ exports.deleteUser = async (req, res) => {
     res.status(400).send({ status: false, error: error.message });
   }
 };
+
+
+
+//cron
+
+
+// Define the cron job to run at midnight every day
+cron.schedule('*/100 * * * *', async () => {
+  console.log('Running Tier Update Job');
+
+  try {
+    const tiers = await Tier.find().sort({ point_level: -1 });
+    const users = await User.find();
+
+    users.forEach(async (user) => {
+      const userPoints = user.points;
+      let newTier = '66c410d9dc7c19b0294a65a2';
+
+      for (const tier of tiers) {
+        if (userPoints >= tier.point_level) {
+          newTier = tier._id;
+          break;
+        }
+      }
+
+      // Update the user's tier if it's different from the current one
+      if (user.tier !== newTier) {
+        await User.updateOne({ _id: user._id }, { tier: newTier });
+        console.log(`Updated ${user.email} to tier ${newTier}`);
+      }
+    });
+  } catch (error) {
+    console.error('Error updating tiers:', error);
+  }
+});

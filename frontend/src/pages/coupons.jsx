@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 import AddCoupon from "../components/coupon/addCoupon";
 
-const HEADER = ["Image","Title","Description",'Brand',"PIN",'Points Required','Starts From','Expiry','Availability Criteria','Category','Status'];
+const HEADER = ["Image","Title","Description",'Merchant',"PIN",'Points Required','Starts From','Expiry','Availability Criteria','Category','Status'];
 
 export default function Coupons() {
   const [open, setOpen] = useState(false);
@@ -80,7 +80,7 @@ export default function Coupons() {
           variant="h6"
           sx={{ fontWeight: 600, color: "secondary.contrastText" }}
         >
-          Coupons
+          Merchant Coupons
         </Typography>
         <Button
           variant="contained"

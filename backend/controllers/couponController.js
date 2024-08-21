@@ -1,8 +1,9 @@
 
 const Coupon = require('../models/coupon.model')
 const moment = require('moment')
-const { v4: uuidv4 } = require("uuid");
 const User = require('../models/user');
+const Transaction = require('../models/transaction');
+const { createTransaction } = require('./transactionController');
 //create coupon
 
 exports.createCoupon = async (req, res) => {
@@ -92,16 +93,22 @@ exports.redeemCoupon = async (req, res) => {
     const { couponId, pin, userId, note } = req.body;
     const checkPin = await Coupon.findOne({ _id: couponId, pin: pin }).select(" points_required");
     const transactionData = {
-      transactionId: uuidv4(),
-      coupon: couponId,
-      userId,
-      note: note ? note : {},
-      status: checkPin ? "success" : "failed",
-      amount: checkPin ? checkPin.coin_worth : 0,
+
+      userId:userId,
+      type: "coupon",
+      relatedId:couponId,
+      pointsRedeemed:checkPin.points_required,
+      note: note ? note:""
     };
-    // await Transaction.create(transactionData);
+    const user = await User.findById(userId)
+    //to check user points
+    if(user.points<checkPin.points_required){
+      throw new Error('User has no sufficient points')
+    }
     if (checkPin) {
       await User.updateOne({ _id: userId }, {  $inc: {  points: -checkPin.points_required },});
+      await createTransaction(transactionData);
+
       res.status(200).send({ status: true, message: "OTP verified successfully", data: checkPin });
     } else {
       res.status(400).send({ status: false, message: "OTP verification failed" });

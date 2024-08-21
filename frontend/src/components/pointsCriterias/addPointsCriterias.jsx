@@ -32,11 +32,11 @@ export default function AddPointsCriteria({
 
   useEffect(() => {
     reset({
-      title: isUpdate ? pointsCriteriaData["title"] : "",
-      points: isUpdate ? pointsCriteriaData["points"] : 0,
-      icon: isUpdate ? pointsCriteriaData["icon"] : "",
-      description: isUpdate ? pointsCriteriaData["description"] : "",
-      limit: isUpdate ? pointsCriteriaData["limit"] : "",
+      title: isUpdate ? pointsCriteriaData["Title"] : "",
+      points: isUpdate ? pointsCriteriaData["Points"] : 0,
+      icon: isUpdate ? pointsCriteriaData["Icon"] : "",
+      description: isUpdate ? pointsCriteriaData["Description"] : "",
+      limit: isUpdate ? pointsCriteriaData["Conditions"] : "",
     });
   }, [open, isUpdate, pointsCriteriaData, reset]);
 

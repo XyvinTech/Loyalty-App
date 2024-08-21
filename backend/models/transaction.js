@@ -30,8 +30,7 @@ const TransactionSchema = new mongoose.Schema(
       type: Object,
     },
     note: {
-      type: String,
-      maxlength: 500,
+      type: Object
     },
     status: {
       type: String,

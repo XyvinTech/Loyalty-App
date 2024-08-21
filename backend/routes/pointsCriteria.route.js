@@ -12,4 +12,15 @@ pointsCriteriaRouter
   .put(pointsCriteriaController.updatePointsCriteria)
   .delete(pointsCriteriaController.deletePointsCriteria);
 
+
+
+
+  pointsCriteriaRouter.route("/points/trigger")
+  .post(pointsCriteriaController.triggerPoints)
+    
+    
+    
+    
+
+
 module.exports = pointsCriteriaRouter;

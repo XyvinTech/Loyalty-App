@@ -7,9 +7,9 @@ import { getTransactions } from '../../services/transaction'
 const HEADER = [
     'Transaction ID',
     'Customer detail',
-    'Loyality Card',
-    'Created on',
-    'Amount',
+    'Type',
+    'Details',
+    'Date',
     'Status'
 ]
 
@@ -23,8 +23,8 @@ export default function Transactions() {
     const init = () => {
         getTransactions().then((res) => {
             if (res.status) {
-                console.log(res.result);
-                setTransactionData(tableHeaderReplace(res.result, ['_id', 'customer', 'loyality', 'createdAt', 'amount', 'status'], HEADER))
+                console.log('trans',res.result);
+                setTransactionData(tableHeaderReplace(res.result, ['transactionId', 'user', 'type', 'details', 'date', 'status'], HEADER))
             }
         })
     }

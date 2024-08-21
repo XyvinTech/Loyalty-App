@@ -1,6 +1,6 @@
-const Discount = require("../models/discount.model.");
+const Discount = require("../models/discount.model");
 const moment = require("moment");
-
+const User = require("../models/user")
 // create discount
 exports.createDiscount = async (req, res) => {
   try {
@@ -16,10 +16,10 @@ exports.createDiscount = async (req, res) => {
       tier_required: req.body.tierRequired.value,
       status: "active",
       discount_code: req.body.DiscountCode,
-      valid_from:req.body.validFrom,
-      valid_to:req.body.validTo
+      valid_from: req.body.validFrom,
+      valid_to: req.body.validTo
     };
-    console.log('ygfyugyugyg',payload);
+    console.log('ygfyugyugyg', payload);
     const discount = new Discount(payload);
     await discount.save();
     res.status(201).send({ status: true, discount });
@@ -33,11 +33,11 @@ exports.createDiscount = async (req, res) => {
 exports.getDiscount = async (req, res) => {
   try {
     const discounts = await Discount.find()
-    .populate({
-      path: 'tier_required',
-      select: 'tier_name' 
-    })
-    .exec();
+      .populate({
+        path: 'tier_required',
+        select: 'tier_name'
+      })
+      .exec();
 
     console.log(discounts);
 
@@ -52,7 +52,7 @@ exports.getDiscount = async (req, res) => {
           description: discount.description,
           percentage: discount.percentage,
           image: discount.image,
-          tierRequired:discount.tier_required[0]?.tier_name,
+          tierRequired: discount.tier_required[0]?.tier_name,
           validFrom: discount.valid_from,
           validTo: discount.valid_to,
           status: discount.status,
@@ -60,7 +60,7 @@ exports.getDiscount = async (req, res) => {
         }
       )
     );
-    
+
     res.status(200).send({ status: true, result: formatData });
   } catch (error) {
     console.log(error);
@@ -106,6 +106,33 @@ exports.deleteDiscount = async (req, res) => {
   try {
     await Discount.findByIdAndDelete({ _id: req.params.id });
     res.status(200).send({ status: true, message: "Successfully deleted" });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+
+exports.redeemDiscount = async (req, res) => {
+  try {
+    const { discountId, userId, note } = req.body;
+    const userDetails = await User.findOne({ _id: userId })
+    const discountTier = await Discount.findById(discountId)
+
+    if (discountTier.tier_required !== userDetails.tier) throw new Error("Cant redeem Discount")
+    const transactionData = {
+
+      userId: userId,
+      type: "discount",
+      relatedId: discountId,
+
+      note: note ? note : ""
+    };
+
+
+    await createTransaction(transactionData);
+
+    res.status(200).send({ status: true, message: "Discount Applied" });
+
   } catch (error) {
     res.status(500).send(error);
   }

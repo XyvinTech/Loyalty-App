@@ -4,11 +4,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 
 export const adminNavActions = [
-    {
-        title:'Dashboard',
-        href:'dashboard/main',
-        icon: <SpaceDashboard/>
-    },
+    // {
+    //     title:'Dashboard',
+    //     href:'dashboard/main',
+    //     icon: <SpaceDashboard/>
+    // },
     // {
     //     title:'Market Place',
     //     href:'dashboard/market-place',
@@ -40,12 +40,12 @@ export const adminNavActions = [
         icon: <AccountBalance/>
     },
     {
-        title:'Coupons',
+        title:'Merchant Coupons',
         href:'dashboard/coupons',
         icon: <PinIcon/>
     },
     {
-        title:'Discounts',
+        title:'Offers',
         href:'dashboard/discounts',
         icon: <Loyalty/>
     },

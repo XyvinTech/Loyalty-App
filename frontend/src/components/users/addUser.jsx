@@ -30,12 +30,12 @@ export default function AddUser({
 
   useEffect(() => {
     reset({
-      email: isUpdate ? userData["email"] : "",
-      phoneNumber: isUpdate ? userData["phoneNumber"] : "",
-      clientCompany: isUpdate ? userData["clientCompany"] : "",
-      points: isUpdate ? userData["points"] : 0,
+      email: isUpdate ? userData["Email"] : "",
+      phoneNumber: isUpdate ? userData["Phone Number"] : "",
+      clientCompany: isUpdate ? userData["Company"] : "",
+      points: isUpdate ? userData["Points"] : 0,
     //   tier: isUpdate ? userData["tier"] : "",
-      referralCode: isUpdate ? userData["referralCode"] : "",
+      referralCode: isUpdate ? userData["Referral Code"] : "",
     });
   }, [open]);
 

@@ -8,7 +8,7 @@ import AddDiscount from "../components/discount/addDiscount";
 
 const HEADER = [
   "Title",
-  "Discount Code",
+  "Offer Code",
   "Description",
   "Percentage",
   // "Image",
@@ -97,7 +97,7 @@ export function Discounts() {
           variant="h6"
           sx={{ fontWeight: 600, color: "secondary.contrastText" }}
         >
-          Discounts
+          Online Offers
         </Typography>
         <Button
           variant="contained"

@@ -27,7 +27,7 @@ export default function PointsCriterias() {
         setPointsCriteriasData(
           tableHeaderReplace(
             res.data,
-            ["title", "points", "icon", "description", "conditions"],
+            ["title", "points", "icon", "description", "limit"],
             HEADER
           )
         );

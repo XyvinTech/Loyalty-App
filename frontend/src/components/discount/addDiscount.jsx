@@ -41,14 +41,14 @@ export default function AddDiscount({
     });
 
     reset({
-      title: isUpdate ? discountsData.title : "",
-      discountCode: isUpdate ? discountsData.DiscountCode : "",
-      description: isUpdate ? discountsData.description : "",
-      percentage: isUpdate ? discountsData.percentage : "",
-      tierRequired: isUpdate ? discountsData.tierRequired : "",
-      validFrom: isUpdate ? discountsData.validFrom : "",
-      validTo: isUpdate ? discountsData.validTo : "",
-      status: isUpdate ? discountsData.status : "",
+      title: isUpdate ? discountsData['Title'] : "",
+      discountCode: isUpdate ? discountsData['Offer Code'] : "",
+      description: isUpdate ? discountsData['Description'] : "",
+      percentage: isUpdate ? discountsData['Percentage'] : "",
+      tierRequired: isUpdate ? discountsData['Tier Required'] : "",
+      validFrom: isUpdate ? discountsData['Valid From']: "",
+      validTo: isUpdate ? discountsData['Valid To'] : "",
+      status: isUpdate ? discountsData['Status'] : "",
     });
   }, [open, isUpdate, discountsData, reset]);
 

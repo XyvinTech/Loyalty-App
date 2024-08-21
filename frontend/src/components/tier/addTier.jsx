@@ -28,10 +28,12 @@ export default function AddTire({
   } = useForm();
 
   useEffect(() => {
-    reset({
-        tier_name: isUpdate ? tiersData["tier_name"] : "",
-        point_level: isUpdate ? tiersData["point_level"] : 0,
-    });
+    if (open) {
+      reset({
+        tier_name: isUpdate && tiersData ? tiersData["Tier name"] : "",
+        point_level: isUpdate && tiersData ? tiersData["Point level"] : 0,
+      });
+    }
   }, [open, isUpdate, tiersData, reset]);
 
   const onSubmit = async (data) => {

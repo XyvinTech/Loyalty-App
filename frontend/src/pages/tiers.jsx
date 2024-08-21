@@ -18,7 +18,6 @@ export default function Tiers() {
   const [editStatus, setEditStatus] = useState(false);
   const [selectedData, setSelectedData] = useState();
 
-  console.log(tiersData)
 
   useEffect(() => {
     init();
@@ -50,6 +49,7 @@ export default function Tiers() {
       setSelectedData(e.data);
       setEditStatus(true);
       setOpen(true);
+      console.log("asa", e.data);
     } else if (e.action === "Delete") {
       deleteTiers(e.data._id);
     }

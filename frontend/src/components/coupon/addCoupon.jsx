@@ -65,16 +65,17 @@ export default function AddCoupon({
     });
 
     reset({
-      title: isUpdate ? couponsData.title : "",
-      description: isUpdate ? couponsData.description : "",
-      brand: isUpdate ? couponsData.brand : "",
-      pin: isUpdate ? couponsData.pin : "",
-      points_required: isUpdate ? couponsData.points_required : 0,
-      starts_from: isUpdate ? couponsData.starts_from : "",
-      expiry: isUpdate ? couponsData.expiry : "",
+      image:isUpdate?couponsData['Image']:"",
+      title: isUpdate ? couponsData['Title'] : "",
+      description: isUpdate ? couponsData['Description'] : "",
+      brand: isUpdate ? couponsData['Merchant'] : "",
+      pin: isUpdate ? couponsData['PIN'] : "",
+      points_required: isUpdate ? couponsData['Points Required'] : 0,
+      starts_from: isUpdate ? couponsData['Starts From'] : "",
+      expiry: isUpdate ? couponsData['Expiry'] : "",
       // no_of_cards: isUpdate ? couponsData.no_of_cards : 0,
-      availability_criteria: isUpdate ? couponsData.availability_criteria : "",
-      category: isUpdate ? couponsData.category : "",
+      availability_criteria: isUpdate ? couponsData['Availability Criteria'] : "",
+      category: isUpdate ? couponsData['Category'] : "",
     });
   }, [open, isUpdate, couponsData, reset]);
 
