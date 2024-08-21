@@ -13,6 +13,7 @@ const couponRouter = require('./routes/coupon.route')
 const discountRouter = require('./routes/discount.route')
 const categoryRouter = require('./routes/category.route')
 const tierRouter = require('./routes/tier.route')
+const appRouter = require('./routes/app.route')
 
 
 
@@ -35,6 +36,7 @@ app.use('/api',couponRouter)
 app.use('/api',discountRouter)
 app.use('/api',categoryRouter)
 app.use('/api',tierRouter)
+app.use('/api',appRouter)
 
 
 
