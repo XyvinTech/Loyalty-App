@@ -11,7 +11,7 @@ export default function Login() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '100vh',
-                backgroundColor: '#f9ced5'
+                backgroundColor: '#c6e980'
             }}>
             <Box sx={{ borderRadius: '8px',p:4,boxShadow:'0 0 6px #5559', backgroundColor:'#ffffff' }}>
                 <Box sx={{mt:1}}>

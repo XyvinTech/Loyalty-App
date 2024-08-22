@@ -28,7 +28,7 @@ export default function StyledTable({ header = [], data = [], isAction = false, 
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 900 }} size='small' hover>
-                <TableHead sx={{ backgroundColor: '#f1c9ce' }}>
+                <TableHead sx={{ backgroundColor: '#e2f2c1' }}>
                     <TableRow>
                         {
                             header.map((head, ind) => {

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { adminNavActions } from "../assets/json/navbar";
 import React from "react";
 import logo from '../assets/logo/logo-new.jpeg';
+import kedmah from "../assets/logo/Kedmah.jpg"
 
 const Sidebar = ({ open, onClose, ...props }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"))
@@ -19,7 +20,7 @@ const Sidebar = ({ open, onClose, ...props }) => {
       <Stack direction={"row"}
         spacing={1}
         sx={{
-          backgroundColor: act && '#c83c4f',
+          backgroundColor: act && '#99C343',
           cursor: 'pointer',
           py: 0.8, px: 1, borderRadius: '8px',
           justifyContent: 'flex-start',
@@ -27,7 +28,7 @@ const Sidebar = ({ open, onClose, ...props }) => {
           color: act ? '#fff' : '#555252',
           textTransform: 'none',
           '&:hover': {
-            backgroundColor: '#c83c4f',
+            backgroundColor: '#99C343',
             color: '#fff'
           }
         }}
@@ -52,7 +53,7 @@ const Sidebar = ({ open, onClose, ...props }) => {
         <Box sx={{ p: 2}}>
           <Stack direction={'row'} sx={{ alignItems: 'center'}}>
             {/* This icon can be replaced with your logo */}
-            <img style={{borderRadius:'50%'}} height={'160px'} src={logo} alt="logo"/>
+            <img style={{borderRadius:'50%'}} height={'140px'} src={kedmah} alt="logo"/>
           </Stack>
         </Box>
         <Box
