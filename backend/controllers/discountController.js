@@ -31,6 +31,9 @@ exports.createDiscount = async (req, res) => {
 // Get discount
 exports.getDiscount = async (req, res) => {
   try {
+
+    let userId = req.params.userId;
+    //! TODO filter by userTier
     const discounts = await Discount.find()
       .populate({
         path: 'tier_required',
