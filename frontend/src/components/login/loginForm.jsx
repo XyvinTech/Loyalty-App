@@ -36,7 +36,7 @@ export default function LoginForm() {
     const adminLogin = await login(data);
     if (adminLogin.status) {
       localStorage.setItem("token", adminLogin.token);
-      navigation("/dashboard/main");
+      navigation("/dashboard/transaction");
       
       toast.success(adminLogin.message);
     } else {

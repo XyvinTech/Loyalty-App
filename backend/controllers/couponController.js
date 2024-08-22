@@ -17,7 +17,10 @@ exports.createCoupon = async (req, res) => {
     value.category = value.category.value
     value.brand = value.brand.value
     value.availability_criteria = value.availability_criteria.label
+    // value.apps = value.apps.value
+    value.apps  = value.apps.map(app => app.value);
 
+console.log("value", value)
     const coupon = new Coupon(value);
     await coupon.save();
     res.status(201).send({ status: true, coupon });
@@ -40,7 +43,6 @@ exports.getCoupon = async (req, res) => {
         select: 'title' // Select only the name from brand (or any relevant field)
       })
       .exec();
-    console.log(coupons)
     let formatData = coupons.map(cou => (
       {
         _id: cou._id,
@@ -72,6 +74,7 @@ exports.editCoupon = async (req, res) => {
     await Coupon.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
     res.status(200).send({ status: true, message: "Successfully edited" });
   } catch (error) {
+    console.log(error)
     res.status(500).send(error);
   }
 };

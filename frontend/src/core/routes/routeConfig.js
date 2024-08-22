@@ -21,7 +21,7 @@ export const RoutesConfig = () => {
     {
       path: "/",
       // element: <Navigate to='/login' replace />
-      element: <Navigate to="/dashboard/main" replace />,
+      element: <Navigate to="/dashboard/transaction" replace />,
     },
     {
       path: "/login",
