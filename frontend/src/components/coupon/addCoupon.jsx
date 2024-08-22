@@ -46,7 +46,7 @@
 //       status: "active",
 //     },
 //   });
-  
+
 //   const AvailabilityArray = [
 //     {
 //       code: 10,
@@ -99,7 +99,6 @@
 //     });
 //   }, [open, isUpdate, couponsData, reset]);
 
-
 //   const loadAppOptions = async (inputValue) => {
 //     try {
 //       const response = await getApp(inputValue); // Replace with your API call
@@ -115,10 +114,6 @@
 //       return [];
 //     }
 //   };
-
-
-
-
 
 //   const onSubmit = async (data) => {
 //     if (isUpdate) {
@@ -430,6 +425,7 @@ import { getCategory } from "../../services/category";
 import { getBrand } from "../../services/brands";
 import AsyncSelect from "react-select/async";
 import { getApp } from "../../services/apps";
+import { getTiers } from "../../services/tier";
 
 export default function AddCoupon({
   open,
@@ -486,8 +482,7 @@ export default function AddCoupon({
         points_required: couponsData["Points Required"] || 0,
         starts_from: couponsData["Starts From"] || "",
         expiry: couponsData["Expiry"] || "",
-        availability_criteria:
-        couponsData["Availability Criteria"] || "",
+        availability_criteria: couponsData["Availability Criteria"] || "",
         category: couponsData["Category"] || "",
       });
     }
@@ -528,6 +523,23 @@ export default function AddCoupon({
     }
   };
 
+  const loadTierOptions = async (inputValue) => {
+    try {
+      const response = await getTiers(inputValue);
+      console.log(response.result)
+      if (response.status) {
+        return response.result.map((tier) => ({
+          value: tier._id,
+          label: tier.tierName,
+        }));
+      }
+      return [];
+    } catch (error) {
+      console.error("Error fetching tiers", error);
+      return [];
+    }
+  };
+
   const onSubmit = async (data) => {
     if (isUpdate) {
       editCoupon(data);
@@ -537,7 +549,7 @@ export default function AddCoupon({
   };
 
   const addCouponHandler = (data) => {
-    console.log("dd",data)
+    console.log("dd", data);
     addCoupon(data)
       .then((res) => {
         if (res.status) {
@@ -626,6 +638,85 @@ export default function AddCoupon({
             />
           </Stack>
           <Stack>
+            <Typography variant="subtitle2">Points required</Typography>
+            <Controller
+              name="points_required"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <StyledTextfield
+                    placeholder="Enter points required"
+                    {...field}
+                  />
+                  {errors.points_required && (
+                    <span style={errorMsgStyle}>
+                      {errors.points_required.message}
+                    </span>
+                  )}
+                </>
+              )}
+              rules={{ required: "Enter points required" }}
+            />
+          </Stack>
+          <Stack>
+            <Typography variant="subtitle2">PIN</Typography>
+            <Controller
+              name="pin"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <StyledTextfield placeholder="Enter PIN" {...field} />
+                  {errors.pin && (
+                    <span style={errorMsgStyle}>{errors.pin.message}</span>
+                  )}
+                </>
+              )}
+              rules={{ required: "Enter PIN" }}
+            />
+          </Stack>
+          <Stack>
+            <Typography variant="subtitle2">Starts From</Typography>
+            <Controller
+              name="starts_from"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <StyledTextfield
+                    type="date"
+                    placeholder="Enter Starts From"
+                    {...field}
+                  />
+                  {errors.starts_from && (
+                    <span style={errorMsgStyle}>
+                      {errors.starts_from.message}
+                    </span>
+                  )}
+                </>
+              )}
+              rules={{ required: "Enter Starts From" }}
+            />
+          </Stack>
+          <Stack>
+            <Typography variant="subtitle2">Expiry</Typography>
+            <Controller
+              name="expiry"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <StyledTextfield
+                    type="date"
+                    placeholder="Enter Expiry"
+                    {...field}
+                  />
+                  {errors.expiry && (
+                    <span style={errorMsgStyle}>{errors.expiry.message}</span>
+                  )}
+                </>
+              )}
+              rules={{ required: "Enter Expiry" }}
+            />
+          </Stack>
+          <Stack>
             <Typography variant="subtitle2">Brand</Typography>
             <Controller
               name="brand"
@@ -645,7 +736,35 @@ export default function AddCoupon({
               )}
             />
           </Stack>
-
+          <Stack>
+            <Typography variant="subtitle2">Tiers</Typography>
+            <Controller
+              name="tiers"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <AsyncSelect
+                    cacheOptions
+                    defaultOptions
+                    loadOptions={loadTierOptions}
+                    value={field.value}
+                    placeholder="Select Tiers"
+                    isMulti
+                    {...field}
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        borderColor: errors.tier ? "red" : base.borderColor,
+                      }),
+                    }}
+                  />
+                  {errors.tier && (
+                    <span style={errorMsgStyle}>{errors.tier.message}</span>
+                  )}
+                </>
+              )}
+            />
+          </Stack>
           <Stack>
             <Typography variant="subtitle2">Apps</Typography>
             <Controller
@@ -673,89 +792,6 @@ export default function AddCoupon({
                   )}
                 </>
               )}
-            />
-          </Stack>
-
-          <Stack>
-            <Typography variant="subtitle2">Points required</Typography>
-            <Controller
-              name="points_required"
-              control={control}
-              render={({ field }) => (
-                <>
-                  <StyledTextfield
-                    placeholder="Enter points required"
-                    {...field}
-                  />
-                  {errors.points_required && (
-                    <span style={errorMsgStyle}>
-                      {errors.points_required.message}
-                    </span>
-                  )}
-                </>
-              )}
-              rules={{ required: "Enter points required" }}
-            />
-          </Stack>
-
-          <Stack>
-            <Typography variant="subtitle2">Starts From</Typography>
-            <Controller
-              name="starts_from"
-              control={control}
-              render={({ field }) => (
-                <>
-                  <StyledTextfield
-                    type="date"
-                    placeholder="Enter Starts From"
-                    {...field}
-                  />
-                  {errors.starts_from && (
-                    <span style={errorMsgStyle}>
-                      {errors.starts_from.message}
-                    </span>
-                  )}
-                </>
-              )}
-              rules={{ required: "Enter Starts From" }}
-            />
-          </Stack>
-
-          <Stack>
-            <Typography variant="subtitle2">Expiry</Typography>
-            <Controller
-              name="expiry"
-              control={control}
-              render={({ field }) => (
-                <>
-                  <StyledTextfield
-                    type="date"
-                    placeholder="Enter Expiry"
-                    {...field}
-                  />
-                  {errors.expiry && (
-                    <span style={errorMsgStyle}>{errors.expiry.message}</span>
-                  )}
-                </>
-              )}
-              rules={{ required: "Enter Expiry" }}
-            />
-          </Stack>
-
-          <Stack>
-            <Typography variant="subtitle2">PIN</Typography>
-            <Controller
-              name="pin"
-              control={control}
-              render={({ field }) => (
-                <>
-                  <StyledTextfield placeholder="Enter PIN" {...field} />
-                  {errors.pin && (
-                    <span style={errorMsgStyle}>{errors.pin.message}</span>
-                  )}
-                </>
-              )}
-              rules={{ required: "Enter PIN" }}
             />
           </Stack>
           <Stack>
@@ -802,17 +838,8 @@ export default function AddCoupon({
           </Stack>
         </Stack>
         <Divider />
-        <Stack
-          direction={"row"}
-          justifyContent={"flex-end"}
-          spacing={2}
-          p={2}
-        >
-          <Button
-            onClick={dialogClose}
-            variant="outlined"
-            color="primary"
-          >
+        <Stack direction={"row"} justifyContent={"flex-end"} spacing={2} p={2}>
+          <Button onClick={dialogClose} variant="outlined" color="primary">
             Cancel
           </Button>
           <Button type="submit" variant="contained" color="primary">

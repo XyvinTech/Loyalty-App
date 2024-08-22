@@ -9,7 +9,7 @@ const DiscountSchema = new mongoose.Schema(
     },
     discount_code: {
       type: String,
-      required: true,
+      // required: true,
     },
     description: {
       type: String,

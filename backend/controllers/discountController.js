@@ -11,14 +11,20 @@ exports.createDiscount = async (req, res) => {
         .send({ status: false, message: "already have a discount" });
       return;
     }
+    console.log('body : ', req.body)
     let payload = {
       ...req.body,
-      tier_required: req.body.tierRequired.value,
+      // tier_required: req.body.tierRequired.value,
       status: "active",
       discount_code: req.body.DiscountCode,
       valid_from: req.body.validFrom,
       valid_to: req.body.validTo
     };
+    payload.apps = payload.apps.map(app => app.value);
+    payload.tier_required = payload.tierRequired.map(tier => tier.value);
+
+    console.log('payload : ' , payload , 'payload -tier : ' , payload.tier_required)
+
     const discount = new Discount(payload);
     await discount.save();
     res.status(201).send({ status: true, discount });

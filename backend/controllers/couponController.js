@@ -18,7 +18,8 @@ exports.createCoupon = async (req, res) => {
     value.brand = value.brand.value
     value.availability_criteria = value.availability_criteria.label
     // value.apps = value.apps.value
-    value.apps  = value.apps.map(app => app.value);
+    value.apps = value.apps.map(app => app.value);
+    value.tier_required = value.tier_required.map(tier => tier.value);
 
 console.log("value", value)
     const coupon = new Coupon(value);
@@ -56,6 +57,7 @@ exports.getCoupon = async (req, res) => {
         startsFrom: cou.starts_from,
         expiry: cou.expiry,
         // noOfCards: cou.no_of_cards,
+        apps: cou.apps,
         availabilityCriteria: cou.availability_criteria,
         category: cou.category.title,
         status: cou.status,
