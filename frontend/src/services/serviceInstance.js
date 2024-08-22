@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://loyalty-app-pnwx.onrender.com/"
-// const BASE_URL = "http://localhost:3005/"
+// const BASE_URL = "https://loyalty-app-pnwx.onrender.com/"
+const BASE_URL = "http://localhost:3005/"
 const token = localStorage.getItem("4ZbQwXtY8uVrN5mP7kL3JhF6");
 
 const setupInterceptors = (instance) => {
@@ -42,4 +42,5 @@ export const POINTS_CRITERIAS_INSTANCE = createAxiosInstance(`${BASE_URL}api/poi
 export const TIER_INSTANCE= createAxiosInstance(`${BASE_URL}api/tier`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 export const COUPON_INSTANCE= createAxiosInstance(`${BASE_URL}api/coupon`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 export const DISCOUNT_INSTANCE= createAxiosInstance(`${BASE_URL}api/discount`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
+export const APPS_INSTANCE = createAxiosInstance(`${BASE_URL}api/app`, { "Content-Type": "application/json",  Authorization: `Bearer ${token}`, });
 

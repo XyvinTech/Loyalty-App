@@ -24,10 +24,10 @@ exports.getApps = async (req, res) => {
         const apps = await App.find();
         let formatData = apps.map(app => (
             {
+                _id: app._id ,
                 title: app.title,
                 logo: app.logo,
-                discription : App.discription,
-
+                description : app.description,
                 createdAt: moment.utc(app.createdAt).format("D/M/YYYY"),
             }))
         res.status(200).send({status:true,result:formatData});

@@ -9,12 +9,12 @@ const AppSchema = new mongoose.Schema(
     } , 
     logo :{
         type: String,
-        required:true,
+        // required:true,
         trim : true
     },
-    discription : {
+    description : {
         type : String,
-        required: true,
+        // required: true,
         trim : true
     }
 
@@ -24,4 +24,4 @@ const AppSchema = new mongoose.Schema(
     }
 )
 
-module.exports =  mongoose.model('app.model', AppSchema)
+module.exports =  mongoose.model('app', AppSchema)

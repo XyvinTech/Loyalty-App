@@ -16,15 +16,15 @@ import {
   updateCategory,
 } from "../../services/category";
 import { toast } from "react-toastify";
-import { addBrand, updateBrand } from "../../services/brands";
+import { addApp, updateApp } from "../../services/apps.js";
 import StyledDropdown from "../../ui/StyledDropdown.jsx";
 import { uploadFile } from "../../services/upload.js";
 
-export default function AddBrand({
+export default function AddApp({
   open,
   onClose,
   isUpdate,
-  brandData,
+  appsData,
   isSubmitted,
 }) {
   const [selectedFile, setSelectedFile] = useState("");
@@ -37,7 +37,9 @@ export default function AddBrand({
 
   useEffect(() => {
     reset({
-      title: isUpdate ? brandData["Title"] : "",
+      logo: isUpdate ? appsData["Logo"] : "",
+      title: isUpdate ? appsData["Title"] : "",
+      description: isUpdate ? appsData["Description"] : "",
     });
   }, [open]);
 
@@ -47,17 +49,17 @@ export default function AddBrand({
       data.logo = url.data[0].url;
     }
     if (isUpdate) {
-      editBrand(data);
+      editApp(data);
     } else {
-      addBrands(data);
+      addApps(data);
     }
   };
 
-  const addBrands = (data) => {
+  const addApps = (data) => {
     let dt = {
       ...data,
     };
-    addBrand(dt)
+    addApp(dt)
       .then((res) => {
         if (res.status) {
           toast.success("Successfully added");
@@ -70,11 +72,11 @@ export default function AddBrand({
       });
   };
 
-  const editBrand = (data) => {
+  const editApp = (data) => {
     let dt = {
       ...data,
     };
-    updateBrand(brandData._id, dt)
+    updateApp(appsData._id, dt)
       .then((res) => {
         if (res.status) {
           toast.success("Successfully Upated");
@@ -108,7 +110,7 @@ export default function AddBrand({
           variant="subtitle1"
           sx={{ color: "primary.dark", fontWeight: 600 }}
         >
-          {isUpdate ? "Edit" : "Add"} Brand
+          {isUpdate ? "Edit" : "Add"} Apps
         </Typography>
         <IconButton onClick={dialogClose}>
           <Close />
@@ -124,16 +126,33 @@ export default function AddBrand({
               control={control}
               render={({ field }) => (
                 <>
-                  <StyledTextfield placeholder="Enter Brand name" {...field} />
+                  <StyledTextfield placeholder="Enter App name" {...field} />
                   {errors.title && (
                     <span style={errorMsgStyle}>{errors.title.message}</span>
                   )}
                 </>
               )}
-              rules={{ required: "Enter Brand Name" }}
+              rules={{ required: "Enter App Name" }}
             />
           </Stack>
-
+          <Stack>
+            <Typography variant="subtitle2">Description </Typography>
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <StyledTextfield placeholder="Enter Description" {...field} />
+                  {errors.description && (
+                    <span style={errorMsgStyle}>
+                      {errors.description.message}
+                    </span>
+                  )}
+                </>
+              )}
+              rules={{ required: "Enter Description" }}
+            />
+          </Stack>
           <Stack>
             <Typography variant="subtitle2">Logo</Typography>
             <input

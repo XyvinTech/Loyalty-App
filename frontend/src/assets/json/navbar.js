@@ -2,6 +2,7 @@ import { AccountBalance, Category, Loyalty, Person, SpaceDashboard, SyncAlt, Wor
 import PinIcon from '@mui/icons-material/Pin';
 import InfoIcon from '@mui/icons-material/Info';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
+import AppsIcon from '@mui/icons-material/Apps';
 
 export const adminNavActions = [
     // {
@@ -29,6 +30,11 @@ export const adminNavActions = [
         href:'dashboard/users',
         icon: <Person/>
     },
+    {
+        title: "Apps",
+        href: "dashboard/apps",
+        icon: <AppsIcon />,
+      },
     {
         title:'Categories',
         href:'dashboard/categories',

@@ -14,6 +14,7 @@ import { Discounts } from "../../pages/discounts";
 import PointsCriterias from "../../pages/pointsCriterias";
 import Tiers from "../../pages/tiers";
 import Coupons from "../../pages/coupons.jsx"
+import Apps from "../../pages/apps.jsx";
 
 export const RoutesConfig = () => {
   return [
@@ -57,6 +58,10 @@ export const RoutesConfig = () => {
         {
           path: "users",
           element: <Users />,
+        },
+        {
+          path: "apps",
+          element: <Apps />,
         },
         {
           path: "categories",

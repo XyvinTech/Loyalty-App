@@ -29,6 +29,11 @@ const DiscountSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    apps: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'App',
+      // required: true
+    }],
 
     valid_from: {
       type: String,

@@ -15,6 +15,11 @@ const CouponSchema = new mongoose.Schema({
     ref:'Brand',
     // required: true
   },
+  apps: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'App',
+    // required: true
+  }],
   image: {
     type: String,
     // required: true
