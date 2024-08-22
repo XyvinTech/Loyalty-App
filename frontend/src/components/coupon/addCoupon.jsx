@@ -779,7 +779,6 @@ export default function AddCoupon({
               )}
             />
           </Stack>
-
           <Stack>
             <Typography variant="subtitle2">Category</Typography>
             <Controller

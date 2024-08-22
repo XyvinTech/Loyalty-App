@@ -18,7 +18,7 @@ exports.createCoupon = async (req, res) => {
     value.category = value.category.value
     value.brand = value.brand.value
     value.availability_criteria = value.availability_criteria.label
-    value.apps = value.apps.value
+    // value.apps = value.apps.value
 
 
 
