@@ -537,6 +537,7 @@ export default function AddCoupon({
   };
 
   const addCouponHandler = (data) => {
+    console.log("dd",data)
     addCoupon(data)
       .then((res) => {
         if (res.status) {

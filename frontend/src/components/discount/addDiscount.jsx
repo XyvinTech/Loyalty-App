@@ -375,6 +375,7 @@ export default function AddDiscount({
         label: tier.tierName,
         value: tier._id,
       }));
+
       callback(options.filter((option) =>
         option.label.toLowerCase().includes(inputValue.toLowerCase())
       ));
