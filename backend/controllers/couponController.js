@@ -7,6 +7,7 @@ const { createTransaction } = require('./transactionController');
 //create coupon
 
 exports.createCoupon = async (req, res) => {
+  console.log(req.body)
   try {
     const getCoupon = await Coupon.findOne({ title: req.body.title })
     if (getCoupon) {
@@ -17,6 +18,9 @@ exports.createCoupon = async (req, res) => {
     value.category = value.category.value
     value.brand = value.brand.value
     value.availability_criteria = value.availability_criteria.label
+    value.apps = value.apps.value
+
+
 
     const coupon = new Coupon(value);
     await coupon.save();
@@ -72,6 +76,7 @@ exports.editCoupon = async (req, res) => {
     await Coupon.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
     res.status(200).send({ status: true, message: "Successfully edited" });
   } catch (error) {
+    console.log(error)
     res.status(500).send(error);
   }
 };
