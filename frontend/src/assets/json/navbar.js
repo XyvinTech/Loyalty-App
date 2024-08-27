@@ -26,7 +26,7 @@ export const adminNavActions = [
     //     icon: <Loyalty/>
     // },
     {
-        title:'Users',
+        title:'Customers',
         href:'dashboard/users',
         icon: <Person/>
     },

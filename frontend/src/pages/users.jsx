@@ -104,7 +104,7 @@ export default function Users() {
           variant="h6"
           sx={{ fontWeight: 600, color: "secondary.contrastText" }}
         >
-          Users
+          Customers
         </Typography>
         <Button
           variant="contained"

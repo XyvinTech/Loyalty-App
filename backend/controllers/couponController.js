@@ -15,7 +15,6 @@ exports.createCoupon = async (req, res) => {
     }
 
     let value = req.body
-    console.log('dasd',value)
 
     value.category = value.category.value
     value.brand = value.brand.value
@@ -24,7 +23,6 @@ exports.createCoupon = async (req, res) => {
     value.apps =  value.apps.map(app => app.value);
     value.tier_required = value.tiers.map(tier => tier.value);
 
-console.log("value", value)
     const coupon = new Coupon(value);
     await coupon.save();
     res.status(201).send({ status: true, coupon });
@@ -44,16 +42,17 @@ exports.getCoupon = async (req, res) => {
       })
       .populate({
         path: 'brand',
-        select: 'title' // Select only the name from brand (or any relevant field)
+        select: 'title logo' // Select only the name from brand (or any relevant field)
       })
       .exec();
+      console.log('eqwewe',coupons)
     let formatData = coupons.map(cou => (
       {
         _id: cou._id,
         title: cou.title,
         description: cou.description,
         brand: cou.brand?.title,
-        image: cou.image ? cou.image : 'https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg',
+        image: cou.brand.logo ? cou.brand.logo : 'https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg',
         pin: cou.pin,
         pointsRequired: cou.points_required,
         coinCost: cou.coin_cost,
