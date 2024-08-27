@@ -76,6 +76,8 @@ export default function AddApp({
     let dt = {
       ...data,
     };
+    console.log('ds',dt,appsData);
+    
     updateApp(appsData._id, dt)
       .then((res) => {
         if (res.status) {

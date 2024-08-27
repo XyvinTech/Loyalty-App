@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = "https://loyalty-app-pnwx.onrender.com/"
-const BASE_URL = "http://localhost:3005/"
+const BASE_URL = "https://loyalty-app-pnwx.onrender.com/"
+// const BASE_URL = "http://localhost:3005/"
 const token = localStorage.getItem("4ZbQwXtY8uVrN5mP7kL3JhF6");
 
 const setupInterceptors = (instance) => {

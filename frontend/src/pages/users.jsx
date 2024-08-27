@@ -33,6 +33,7 @@ export default function Users() {
       if (res.status) {
 
         const transformedData = res.result.map(user => ({
+          _id:user._id,
           email: user.email,
           phoneNumber: user.phoneNumber,
           clientCompany: user.clientCompany,

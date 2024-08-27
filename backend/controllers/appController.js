@@ -41,7 +41,7 @@ exports.getApps = async (req, res) => {
 // edit app
 exports.editApp = async (req, res) => {
     try {
-        await App.findByIdAndUpdate({ _id: req.params.id },{title:req.body.title})
+        await App.findByIdAndUpdate({ _id: req.params.id },req.body)
         res.status(200).send({status:true,message:"Successfully edited"});
     } catch (error) {
         res.status(500).send(error);

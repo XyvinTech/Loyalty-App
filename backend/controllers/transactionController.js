@@ -46,7 +46,7 @@ exports.getTransactions = async (req, res) => {
           status: transaction.status,
           type: transaction.transactionType,
           date:transaction.createdAt,
-          details:details.title, // add the specific details based on the transaction type
+          details:details?.title, // add the specific details based on the transaction type
         };
       });
 

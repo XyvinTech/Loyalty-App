@@ -2,7 +2,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import LoginForm from "../components/login/loginForm";
 import logo from "../assets/logo/logo-new.jpeg";
-import cbsLogo from "../assets/logo/set.png";
+import cbsLogo from "../assets/logo/cbs-white.jpg";
 import kedmah from "../assets/logo/Kedmah.jpg";
 
 export default function Login() {
@@ -28,7 +28,7 @@ export default function Login() {
           <Box sx={{ mt: 1 }}>
             <img
               width={"100%"}
-              height={"200px"}
+              height={"100px"}
               style={{ objectFit: "contain"}}
               src={kedmah}
               alt="logo"
@@ -38,10 +38,10 @@ export default function Login() {
         </Box>
         <Box sx={{ mt: 1 }}>
           <Typography align="center" marginBottom={1}>Powered By</Typography>
-
+<Stack direction={"row"}>
           <img
             width={"50%"}
-            height={"100"}
+            height={"150"}
             style={{ objectFit: "contain"}}
             src={logo}
             alt="logo"
@@ -49,11 +49,12 @@ export default function Login() {
 
           <img
             width={"50%"}
-            height={"100"}
+            height={"150"}
             style={{ objectFit: "contain" }}
             src={cbsLogo}
             alt="logo"
           />
+          </Stack>
         </Box>
       </Stack>
     </Box>

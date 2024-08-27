@@ -26,7 +26,6 @@ export default function Apps() {
     const init = () => {
         getApp().then((res) => {
             if (res.status) {
-                console.log(res.result)
                 setAppsData(tableHeaderReplace(res.result, [ 'logo', 'title', 'description',  'createdAt'], HEADER))
             }
         })
@@ -50,7 +49,6 @@ export default function Apps() {
     }
 
 
-    console.log(appsData)
 
     return (
         <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
