@@ -13,13 +13,16 @@ exports.createCoupon = async (req, res) => {
       res.status(500).send({ status: false, message: 'already have a coupon' });
       return
     }
+
     let value = req.body
+    console.log('dasd',value)
+
     value.category = value.category.value
     value.brand = value.brand.value
     value.availability_criteria = value.availability_criteria.label
-    // value.apps = value.apps.value
-    value.apps = value.apps.map(app => app.value);
-    value.tier_required = value.tier_required.map(tier => tier.value);
+  
+    value.apps =  value.apps.map(app => app.value);
+    value.tier_required = value.tiers.map(tier => tier.value);
 
 console.log("value", value)
     const coupon = new Coupon(value);
