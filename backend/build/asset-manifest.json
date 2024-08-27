@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.3572f698.css",
-    "main.js": "/static/js/main.be953fff.js",
+    "main.js": "/static/js/main.c80a1b8f.js",
     "static/media/cbs-white.jpg": "/static/media/cbs-white.2e781ecc11f3c1db3b6c.jpg",
     "static/media/Kedmah.jpg": "/static/media/Kedmah.e9d891b55a510f148091.jpg",
     "static/media/logo-new.jpeg": "/static/media/logo-new.20db658e8242f43f4e7a.jpeg",
     "index.html": "/index.html",
     "main.3572f698.css.map": "/static/css/main.3572f698.css.map",
-    "main.be953fff.js.map": "/static/js/main.be953fff.js.map"
+    "main.c80a1b8f.js.map": "/static/js/main.c80a1b8f.js.map"
   },
   "entrypoints": [
     "static/css/main.3572f698.css",
-    "static/js/main.be953fff.js"
+    "static/js/main.c80a1b8f.js"
   ]
 }
